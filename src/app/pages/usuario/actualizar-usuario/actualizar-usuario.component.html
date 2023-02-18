@@ -1,1 +1,62 @@
-<p>actualizar-usuario works!</p>
+<app-header></app-header>
+<section>
+    <div class="container-fluid justify-content-center pt-5">
+        <div class="row pt-5">
+            <div class="col-sm-8 col-md-6 col-xl-4 mx-auto pt-5">
+                <div class="card bg-light mb-3">
+                    <div class="card-header text-center">Actualizar Usuario</div>
+                    <div class="card-body">
+                        <form novalidate="" class="form-group p-2" #formRegister="ngForm"
+                            (ngSubmit)="updateUser(formRegister)">
+                            <div class="form-group mb-3">
+                                <label for="nameLabel" class="form-label">Nombre</label>
+                                <input type="text" name="name" placeholder="" class="form-control" ngModel>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="emailLabel" class="form-label">Correo electrónico</label>
+                                <input type="email" name="email" placeholder="" class="form-control"
+                                    ngModel>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <label for="departamentoSelect" class="form-label">Departamento/Base</label>
+                                <select id="departamentoSelect" class="form-select" name="departamento" ngModel>
+                                    <option value="DEPARTAMENTO MAQUINAS">Departamento Máquinas</option>
+                                    <option value="DEPARTAMENTO CUBIERTA">Departamento Cubiertas</option>
+                                    <option value="OFICINA CENTRAL">Oficinal Central</option>
+                                    <option value="BASE PACIFICO">Base Pacífico</option>
+                                    <option value="BASE GOLFO">Base Golfo</option>
+                                    <option value="BASE MEXICO">Base México</option>
+                                </select>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" aria-label="Buque" name="buque" ngModel>
+                                    <option value="EL PUMA">El Puma</option>
+                                    <option value="JUSTO SIERRA">Justo Sierra</option>
+                                    <option value="AMBOS">Ambos</option>
+                                </select>
+                                <label for="floatingSelect">Buque</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" aria-label="Cargo" name="cargo" ngModel>
+                                    <option value="1er OFICIAL DE MAQUINAS">1er Oficial de Máquinas</option>
+                                    <option value="2do OFICIAL DE MAQUINAS">2do Oficial de Máquinas</option>
+                                    <option value="CAPITAN">Capitán</option>
+                                    <option value="1er OFICIAL DE CUBIERTA">1er Oficial de Cubierta</option>
+                                    <option value="2do OFICIAL DE CUBIERTA">2do Oficial de Cubierta</option>
+                                    <option value="DELEGADO ADMINISTRATIVO">Delegado Administrativo</option>
+                                    <option value="USUARIO GENERAL">Usuario General</option>
+                                </select>
+                                <label for="floatingSelect">Cargo</label>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">Actualizar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<app-footer></app-footer>

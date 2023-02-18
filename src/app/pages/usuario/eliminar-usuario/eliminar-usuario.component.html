@@ -1,0 +1,23 @@
+<app-header></app-header>
+<section class="py-5">
+    <div class="container-fluid justify-content-center py-5">
+        <div class="row pt-5">
+            <div class="col-sm-8 col-md-6 col-lg-6 col-xl-4 mx-auto pt-3 pt-md-0">
+                <div class="card text-center bg-light mb-3">
+                    <div class="card-header">Ingresa el correo del usuario</div>
+                    <div class="card-body">
+                        <form novalidate="" class="form-group p-2" #formLogin="ngForm" (ngSubmit)="delete_users(formLogin)">
+                            <div class="form-group mb-3">
+                                <input type="email" name="email" placeholder="Correo electrónico" class="form-control" ngModel>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">Eliminar Usuario</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

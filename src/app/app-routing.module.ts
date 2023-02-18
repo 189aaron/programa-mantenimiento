@@ -9,6 +9,8 @@ import { RegistrarEquipoComponent } from './pages/equipos/registrar-equipo/regis
 import { ConsutarEquipoComponent } from './pages/equipos/consutar-equipo/consutar-equipo.component';
 import { ListarUsuariosComponent } from './pages/usuario/listar-usuarios/listar-usuarios.component';
 import { RefreshTokenComponent } from './pages/usuario/refresh-token/refresh-token.component';
+import { ActualizarUsuarioComponent } from './pages/usuario/actualizar-usuario/actualizar-usuario.component';
+import { EliminarUsuarioComponent } from './pages/usuario/eliminar-usuario/eliminar-usuario.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -19,6 +21,8 @@ const routes: Routes = [
   { path: 'equipos/consultar', component: ConsutarEquipoComponent },
   { path: 'usuarios/consultar', component: ListarUsuariosComponent },
   { path: 'usuarios/renviar_token', component: RefreshTokenComponent },
+  { path: 'usuarios/actualizar', component: ActualizarUsuarioComponent},
+  { path: 'usuarios/eliminar', component: EliminarUsuarioComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 
