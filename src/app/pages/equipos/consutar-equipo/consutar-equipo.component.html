@@ -1,0 +1,58 @@
+<app-header></app-header>
+<section class="py-5">
+    <div class="container-fluid justify-content-center py-5">
+
+        <h3 class="ms-5 pt-3">Consulta de Equipos</h3>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <p class="text-end me-5"><button type="submit" class="btn btn-primary btn-lg" (click)="get_equipment()">Obtener listado</button></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="col">Número de inventario</th>
+                                <th class="col">Nombre del equipo</th>
+                                <th class="col">Localización del equipo</th>
+                                <th class="col">Ubicación el equipo</th>
+                                <th class="col">Marca del equipo</th>
+                                <th class="col">Modelo del equipo</th>
+                                <th class="col">Tipo</th>
+                                <th class="col">Número de serie</th>
+                                <th class="col">Potencia</th>
+                                <th class="col">Fecha de calibración</th>
+                                <th class="col">Observaciones</th>
+                                <th class="col" *ngIf="adminUser">Usuario</th>
+                                <th class="col" *ngIf="adminUser">Modificado por</th>
+                            </tr>
+                        </thead>
+                        <div [innerHTML]="conData"></div>
+                        <tbody *ngIf="whit_data">
+                            <tr *ngFor="let item of equipment_array;">
+                                <td>{{item.unam_number}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.location}}</td>
+                                <td>{{item.part_ship}}</td>
+                                <td>{{item.trademark}}</td>
+                                <td>{{item.model}}</td>
+                                <td>{{item.type}}</td>
+                                <td>{{item.serial_number}}</td>
+                                <td>{{item.power}}</td>
+                                <td>{{item.calibration_date}}</td>
+                                <td>{{item.observations}}</td>
+                                <td *ngIf="adminUser">{{item.user}}</td>
+                                <td *ngIf="adminUser">{{item.modify_by}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

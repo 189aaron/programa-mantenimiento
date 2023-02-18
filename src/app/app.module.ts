@@ -3,10 +3,21 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { LoginComponent } from './pages/login/login.component';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './pages/home/home.component';
+import { RegistrarEquipoComponent } from './pages/equipos/registrar-equipo/registrar-equipo.component';
+import { ConsutarEquipoComponent } from './pages/equipos/consutar-equipo/consutar-equipo.component';
+import { ListarUsuariosComponent } from './pages/usuario/listar-usuarios/listar-usuarios.component';
+import { RefreshTokenComponent } from './pages/usuario/refresh-token/refresh-token.component';
+import { ActualizarUsuarioComponent } from './pages/usuario/actualizar-usuario/actualizar-usuario.component';
 
 @NgModule({
   declarations: [
@@ -14,11 +25,20 @@ import { UsuarioComponent } from './pages/usuario/usuario.component';
     LoginComponent,
     HeaderComponent,
     FooterComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    PageNotFoundComponent,
+    HomeComponent,
+    RegistrarEquipoComponent,
+    ConsutarEquipoComponent,
+    ListarUsuariosComponent,
+    RefreshTokenComponent,
+    ActualizarUsuarioComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

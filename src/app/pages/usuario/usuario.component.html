@@ -2,53 +2,61 @@
 <section>
     <div class="container-fluid justify-content-center pt-5">
         <div class="row pt-5">
-            <div class="col-sm-8 col-md-6 col-lg-6 col-xl-4 mx-auto pt-5">
-                <div class="card text-center bg-light mb-3">
-                    <div class="card-header">Registrar</div>
+            <div class="col-sm-8 col-md-6 col-xl-4 mx-auto pt-5">
+                <div class="card bg-light mb-3">
+                    <div class="card-header text-center">Registrar</div>
                     <div class="card-body">
-                        <form novalidate="" class="p-2">
-                            <div class="mb-3">
-                                <input placeholder="Nombre" type="text" class="form-control" id="Nombre">
+                        <form novalidate="" class="form-group p-2" #formRegister="ngForm"
+                            (ngSubmit)="registerUser(formRegister)">
+                            <div class="form-group mb-3">
+                                <label for="nameLabel" class="form-label">Nombre</label>
+                                <input type="text" name="name" placeholder="" class="form-control" ngModel>
                             </div>
-                            <div class="mb-3">
-                                <input placeholder="Correo electrónico" type="text" class="form-control"
-                                    id="staticEmail">
+                            <div class="form-group mb-3">
+                                <label for="emailLabel" class="form-label">Correo electrónico</label>
+                                <input type="email" name="email" placeholder="" class="form-control"
+                                    ngModel>
                             </div>
-                            <div class="mb-3">
-                                <input placeholder="Password" type="password" class="form-control" id="inputPassword">
+                            <div class="form-group mb-3">
+                                <label for="passwordLabel" class="form-label">Contraseña</label>
+                                <input type="password" name="password" placeholder="" class="form-control"
+                                    ngModel>
                             </div>
-                            <div class="mb-3">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Oficina/Buque</option>
-                                    <option value="1">Central</option>
-                                    <option value="2">Base Golfo</option>
-                                    <option value="3">Justo Sierra</option>
-                                    <option value="4">Base Pacífico</option>
-                                    <option value="5">El Puma</option>
+                            <div class="form-floating mb-3">
+                                <label for="departamentoSelect" class="form-label">Departamento/Base</label>
+                                <select id="departamentoSelect" class="form-select" name="departamento" ngModel>
+                                    <option value="DEPARTAMENTO MAQUINAS">Departamento Máquinas</option>
+                                    <option value="DEPARTAMENTO CUBIERTA">Departamento Cubiertas</option>
+                                    <option value="OFICINA CENTRAL">Oficinal Central</option>
+                                    <option value="BASE PACIFICO">Base Pacífico</option>
+                                    <option value="BASE GOLFO">Base Golfo</option>
+                                    <option value="BASE MEXICO">Base México</option>
                                 </select>
                             </div>
-                            <div class="mb-3">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Cargo</option>
-                                    <option value="1">Administrativo</option>
-                                    <option value="1">Delegado Administrativo</option>
-                                    <option value="1">Jefe de Área</option>
-                                    <option value="1">Asistente de Procesos</option>
-                                    <option value="2">Capitán</option>
-                                    <option value="3">Oficial de Cubierta</option>
-                                    <option value="4">Jefe de Máquinas</option>
-                                    <option value="5">Oficial de Máquinas</option>
-                                    <option value="6">Ingeniero Marino</option>
-                                    <option value="7">Contramaestre</option>
-                                    <option value="8">Operario diversos oficios</option>
-                                    <option value="9">Marino Timonel</option>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" aria-label="Buque" name="buque" ngModel>
+                                    <option value="EL PUMA">El Puma</option>
+                                    <option value="JUSTO SIERRA">Justo Sierra</option>
+                                    <option value="AMBOS">Ambos</option>
                                 </select>
+                                <label for="floatingSelect">Buque</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" aria-label="Cargo" name="cargo" ngModel>
+                                    <option value="1er OFICIAL DE MAQUINAS">1er Oficial de Máquinas</option>
+                                    <option value="2do OFICIAL DE MAQUINAS">2do Oficial de Máquinas</option>
+                                    <option value="CAPITAN">Capitán</option>
+                                    <option value="1er OFICIAL DE CUBIERTA">1er Oficial de Cubierta</option>
+                                    <option value="2do OFICIAL DE CUBIERTA">2do Oficial de Cubierta</option>
+                                    <option value="DELEGADO ADMINISTRATIVO">Delegado Administrativo</option>
+                                    <option value="USUARIO GENERAL">Usuario General</option>
+                                </select>
+                                <label for="floatingSelect">Cargo</label>
                             </div>
                             <div class="d-grid">
-                                <button class="btn btn-primary btn-lg"> Registrar </button>
+                                <button type="submit" class="btn btn-primary btn-lg">Registrar</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>

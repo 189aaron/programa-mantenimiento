@@ -1,13 +1,14 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 
 @Component({
-  selector: 'app-usuario',
-  templateUrl: './usuario.component.html'
+  selector: 'app-refresh-token',
+  templateUrl: './refresh-token.component.html'
 })
-export class UsuarioComponent implements OnInit {
+export class RefreshTokenComponent implements OnInit {
 
   constructor(
     private router: Router,
@@ -20,15 +21,9 @@ export class UsuarioComponent implements OnInit {
     }
   }
 
-  registerUser(form: NgForm) {
-    const name = form.value.name;
+  refreshToken(form: NgForm) {
     const email = form.value.email;
-    const password = form.value.password;
-    const department_or_base = form.value.departamento;
-    const ship = form.value.buque;
-    const position = form.value.cargo;
-
-    this.loginService.registerUser(name, email, password, department_or_base, ship, position);
+    this.loginService.refreshToken(email);
   }
 
 }

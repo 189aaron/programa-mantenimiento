@@ -1,0 +1,46 @@
+<app-header></app-header>
+<section class="py-5">
+    <div class="container-fluid justify-content-center py-5">
+
+        <h3 class="ms-5 pt-3">Consulta de Usuarios</h3>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <p class="text-end me-5"><button type="submit" class="btn btn-primary btn-lg" (click)="get_users()">Obtener listado</button></p>
+            </div>
+        </div>
+        <div class="row  text-center">
+            <div class="col pt-5">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="col">Nombre de Usuario</th>
+                                <th class="col">Correo</th>
+                                <th class="col">Departamento o Base</th>
+                                <th class="col">Buque</th>
+                                <th class="col">Posición</th>
+                                <th class="col">Fecha Alta</th>
+                                <th class="col">Ultimo Acceso</th>
+                            </tr>
+                        </thead>
+                        <div [innerHTML]="conData"></div>
+                        <tbody *ngIf="whit_data">
+                            <tr *ngFor="let item of users_array;">
+                                <td>{{item.name}}</td>
+                                <td>{{item.email}}</td>
+                                <td>{{item.department_or_base}}</td>
+                                <td>{{item.ship}}</td>
+                                <td>{{item.position}}</td>
+                                <td>{{item.created_at}}</td>
+                                <td>{{item.last_login}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>
