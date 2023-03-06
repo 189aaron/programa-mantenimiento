@@ -63,4 +63,12 @@ export class ConsutarEquipoComponent implements OnInit {
       this.whit_data = false;
     }
   }
+
+  editarEquipo(equipo: any){
+    console.log(equipo);
+  }
+
+  borrarEquipo(equipo: any){
+    console.log(equipo);
+  }
 }

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -24,7 +24,7 @@ export class AuthServiceService {
         'Content-Type': 'application/json'
       })
     };
-
+  
     return this.http.post(this.path + 'auth/login/', body, httpOptions).subscribe({
       next: (response: any) => {
         console.log(response);
@@ -51,17 +51,18 @@ export class AuthServiceService {
   }
 
   refreshToken(email: string) {
-    const body = {
-      'email': email
-    };
 
-    let httpOptions = {
+    const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('id_token'),
+      }),
+      params: {
+        'email': email,
+      }
     };
 
-    return this.http.post(this.path + 'auth/refresh_token/', body, httpOptions).subscribe({
+    return this.http.get(this.path + 'auth/refresh-token/', httpOptions).subscribe({
       next: (response: any) => {
         localStorage.setItem('id_token', response.tokens.access);
         if (localStorage.getItem('id_token') != "null") {
@@ -72,11 +73,9 @@ export class AuthServiceService {
         }
       },
       error: (error: any) => {
-        if (error.status == '500') {
-          alert(error.error);
-        } else {
-          alert(error.error.detail);
-        }
+        console.error(error.error);
+        alert(error.error);
+        
 
       }
     });

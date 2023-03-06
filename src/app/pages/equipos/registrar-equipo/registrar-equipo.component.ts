@@ -11,6 +11,8 @@ import { EquipmentServiceService } from 'src/app/services/equipment-service.serv
 })
 export class RegistrarEquipoComponent implements OnInit {
 
+  pSU: boolean = false;
+
   constructor(
     private router: Router,
     private loginService: AuthServiceService,
@@ -20,6 +22,13 @@ export class RegistrarEquipoComponent implements OnInit {
     let session = localStorage.getItem('id_token');
     if (session == null || session == undefined) {
       this.router.navigate(['/login']);
+    }
+
+    let pSU = localStorage.getItem('position');
+    if (pSU == 'SUPERUSUARIO'){
+      this.pSU = true;
+    }else {
+      this.pSU = false;
     }
   }
 
@@ -31,6 +40,7 @@ export class RegistrarEquipoComponent implements OnInit {
     const trademark = form.value.trademark;
     const model = form.value.model;
     const type = form.value.type;
+    const ship = form.value.ship
     const serial_number = form.value.serial_number;
     const power = form.value.power;
     const calibration_date_date = form.value.calibration_date_date;

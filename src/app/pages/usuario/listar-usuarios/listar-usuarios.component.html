@@ -6,7 +6,8 @@
         <div class="row">
             <div class="col"></div>
             <div class="col">
-                <p class="text-end me-5"><button type="submit" class="btn btn-primary btn-lg" (click)="get_users()">Obtener listado</button></p>
+                <p class="text-end me-5"><button type="submit" class="btn btn-primary btn-lg"
+                        (click)="get_users()">Obtener listado</button></p>
             </div>
         </div>
         <div class="row  text-center">
@@ -26,14 +27,18 @@
                         </thead>
                         <div [innerHTML]="conData"></div>
                         <tbody *ngIf="whit_data">
-                            <tr *ngFor="let item of users_array;">
-                                <td>{{item.name}}</td>
-                                <td>{{item.email}}</td>
-                                <td>{{item.department_or_base}}</td>
-                                <td>{{item.ship}}</td>
-                                <td>{{item.position}}</td>
-                                <td>{{item.created_at}}</td>
-                                <td>{{item.last_login}}</td>
+                            <tr *ngFor="let usuario of users_array;">
+                                <td>{{usuario.name}}</td>
+                                <td>{{usuario.email}}</td>
+                                <td>{{usuario.department_or_base}}</td>
+                                <td>{{usuario.ship}}</td>
+                                <td>{{usuario.position}}</td>
+                                <td>{{usuario.created_at}}</td>
+                                <td>{{usuario.last_login}}</td>
+                                <td>
+                                    <button class="btn btn-primary" (click)="editarUsuario(usuario)">Editar</button>
+                                    <button class="btn btn-danger" (click)="borrarUsuario(usuario)">Borrar</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

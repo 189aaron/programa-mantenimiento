@@ -6,7 +6,8 @@
                 <div class="card bg-light mb-3">
                     <div class="card-header text-center">Registrar Equipo</div>
                     <div class="card-body">
-                        <form novalidate class="form-group p-2" #formRegisterEquipment="ngForm" (ngSubmit)="add_equipment(formRegisterEquipment)">
+                        <form novalidate class="form-group p-2" #formRegisterEquipment="ngForm"
+                            (ngSubmit)="add_equipment(formRegisterEquipment)">
                             <div class="form-group mb-3">
                                 <label for="unamNumberLabel" class="form-label">Número de inventario</label>
                                 <input type="text" name="unam_number" placeholder="" class="form-control" ngModel>
@@ -27,16 +28,22 @@
                                     <option value="ESTRIBOR">Estribor</option>
                                     <option value="BABOR">Babor</option>
                                 </select>
-                              </div>
+                            </div>
+                            <div class="mb-3" *ngIf="pSU">
+                                <label for="buquePSU" class="form-label">Navio al que pertenece</label>
+                                <select id="buquePSU" class="form-select" name="ship" ngModel>
+                                    <option value="EL PUMA">El Puma</option>
+                                    <option value="JUSTO SIERRA">Justo Sierra</option>
+                                    <option value="AMBOS">Ambos</option>
+                                </select>
+                            </div>
                             <div class="form-group mb-3">
                                 <label for="trademarkLabel" class="form-label">Marca del equipo</label>
-                                <input type="text" name="trademark" placeholder="" class="form-control"
-                                    ngModel>
+                                <input type="text" name="trademark" placeholder="" class="form-control" ngModel>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="modelLabel" class="form-label">Modelo del equipo</label>
-                                <input type="text" name="model" placeholder="" class="form-control"
-                                    ngModel>
+                                <input type="text" name="model" placeholder="" class="form-control" ngModel>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="typeLabel" class="form-label">Tipo</label>
@@ -44,7 +51,8 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="serialNumberLabel" class="form-label">Número de serie</label>
-                                <input type="text" name="serial_number" placeholder="Número de serie" class="form-control" ngModel>
+                                <input type="text" name="serial_number" placeholder="Número de serie"
+                                    class="form-control" ngModel>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="powerLabel" class="form-label">Potencia</label>
@@ -52,13 +60,16 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="Label" class="form-label">Fecha de calibración</label>
-                                <input type="date" name="calibration_date_date" placeholder="Fecha de calibración" class="form-control" ngModel>
-                                <input type="time" name="calibration_date_time" placeholder="Hora de calibración" class="form-control" ngModel>
+                                <input type="date" name="calibration_date_date" placeholder="Fecha de calibración"
+                                    class="form-control" ngModel>
+                                <input type="time" name="calibration_date_time" placeholder="Hora de calibración"
+                                    class="form-control" ngModel>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="RegisterEquipmentText" class="form-label">Observaciones</label>
-                                <textarea class="form-control" name="observations" rows="3" class="form-control" ngModel></textarea>
-                              </div>
+                                <textarea class="form-control" name="observations" rows="3" class="form-control"
+                                    ngModel></textarea>
+                            </div>
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-primary btn-lg">Registrar</button>
                             </div>

@@ -47,7 +47,7 @@ export class EquipmentServiceService {
         }else if (error.status == '401') {
           alert(error.error.detail);
         } else {
-          alert(JSON.stringify(error));
+          alert(JSON.stringify(error.error));
         }
         
       }

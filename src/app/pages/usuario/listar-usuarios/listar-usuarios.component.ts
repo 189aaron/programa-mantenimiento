@@ -68,4 +68,12 @@ export class ListarUsuariosComponent implements OnInit {
     }
   }
 
+  editarUsuario(usuario: any){
+    console.log(usuario);
+  }
+
+  borrarUsuario(usuario: any){
+    console.log(usuario);
+  }
+
 }
