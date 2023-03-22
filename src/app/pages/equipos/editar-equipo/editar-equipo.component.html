@@ -1,0 +1,94 @@
+<app-header></app-header>
+<section class="py-5">
+    <div class="container-fluid justify-content-center py-5">
+        <div class="row pt-5">
+            <div class="col-sm-8 col-md-6 col-lg-6 col-xl-4 mx-auto">
+                <div class="card bg-light mb-3">
+                    <div class="card-header text-center">Registrar Equipo</div>
+                    <div class="card-body">
+                        <form novalidate class="form-group p-2" #formRegisterEquipment="ngForm"
+                        (ngSubmit)="updateEquipment(formRegisterEquipment)">
+                        <div class="form-group mb-3">
+                            <label for="unamNumberLabel" class="form-label">Número de inventario</label>
+                            <input type="text" name="unam_number" placeholder="" class="form-control" [(ngModel)]="unam_number">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="nameLabel" class="form-label">Nombre del equipo</label>
+                            <input type="text" name="name" placeholder="" class="form-control" [(ngModel)]="name">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="locationLabel" class="form-label">Departamento</label>
+                            <select class="form-select" name="location" [(ngModel)]="location">
+                                <option value="MAQUINAS">Maquinas</option>
+                                <option value="CUBIERTA">Cubierta</option>
+                                <option value="ELECTRONICA">Electrónica</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="partShipSelect" class="form-label">Ubicación dentro del buque</label>
+                            <select id="partShipSelect" class="form-select" name="part_ship" [(ngModel)]="part_ship">
+                                <option value="PROA">Proa</option>
+                                <option value="POPA">Popa</option>
+                                <option value="ESTRIBOR">Estribor</option>
+                                <option value="BABOR">Babor</option>
+                            </select>
+                        </div>
+                        <div class="mb-3" *ngIf="pSU">
+                            <label for="buquePSU" class="form-label">Buque al que pertenece</label>
+                            <select id="buquePSU" class="form-select" name="ship" [(ngModel)]="ship">
+                                <option value="EL PUMA">El Puma</option>
+                                <option value="JUSTO SIERRA">Justo Sierra</option>
+                            </select>
+                        </div>
+                        <div class="mb-3" *ngIf="pSU">
+                            <label for="buquePSU" class="form-label">Departamento o base al que pertenece</label>
+                            <select id="buquePSU" class="form-select" name="department_or_base" [(ngModel)]="department_or_base">
+                                <option value="DEPARTAMENTO MAQUINAS">Departamento Máquinas</option>
+                                    <option value="DEPARTAMENTO CUBIERTA">Departamento Cubiertas</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="trademarkLabel" class="form-label">Marca del equipo</label>
+                            <input type="text" name="trademark" placeholder="" class="form-control" [(ngModel)]="trademark">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="modelLabel" class="form-label">Modelo del equipo</label>
+                            <input type="text" name="model" placeholder="" class="form-control" [(ngModel)]="model">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="typeLabel" class="form-label">Tipo</label>
+                            <input type="text" name="type" placeholder="Tipo" class="form-control" [(ngModel)]="type">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="serialNumberLabel" class="form-label">Número de serie</label>
+                            <input type="text" name="serial_number" placeholder="Número de serie"
+                                class="form-control" [(ngModel)]="serial_number">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="powerLabel" class="form-label">Potencia</label>
+                            <input type="text" name="power" placeholder="Potencia" class="form-control" [(ngModel)]="power">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="Label" class="form-label">Fecha de calibración</label>
+                            <input type="date" name="calibration_date_date" placeholder="Fecha de calibración"
+                                class="form-control" [(ngModel)]="calibration_date_date">
+                            <input type="time" name="calibration_date_time" placeholder="Hora de calibración"
+                                class="form-control" [(ngModel)]="calibration_date_time">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="RegisterEquipmentText" class="form-label">Observaciones</label>
+                            <textarea class="form-control" name="observations" rows="3" class="form-control"
+                            [(ngModel)]="observations"></textarea>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Registrar</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<app-footer></app-footer>

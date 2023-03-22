@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  userAdministrador: boolean = true;//Solo para administradores
-  superUsuario: boolean = true;//exclusivo superUsuario, no admins
+  userAdministrador: boolean = false;//Solo para administradores
+  superUsuario: boolean = false;//exclusivo superUsuario, no admins
 
   constructor(
     private router: Router) { }
@@ -17,6 +17,14 @@ export class HomeComponent implements OnInit {
     let session = localStorage.getItem('id_token');
     if(session == null || session == undefined){
       this.router.navigate(['/login']);
+    }
+    let superAdmin = localStorage.getItem('position');
+    if( superAdmin == 'SUPERUSUARIO'){
+      this.superUsuario = true;
+      console.log('Es super usuario');
+    }else if( superAdmin == 'CAPITAN' || superAdmin == 'JEFE DE MAQUINAS'){
+      this.userAdministrador = true;
+      console.log('Es administrador '+superAdmin);
     }
   }
 

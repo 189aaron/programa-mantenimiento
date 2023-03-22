@@ -1,0 +1,52 @@
+<app-header></app-header>
+<section class="py-5">
+    <div class="container-fluid justify-content-center py-5">
+        <h3 class="ms-5 pt-3">Consulta de Refacciones</h3>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <!--<p class="text-end me-5"><button type="submit" class="btn btn-primary btn-lg"
+                        (click)="get_sparepart()">Obtener listado</button></p>-->
+            </div>
+        </div>
+        <div class="row pt-3">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="col">Equipo al que pertenece</th>
+                                <th class="col">Numero de serie de Equipo</th>
+                                <th class="col">amount</th>
+                                <th class="col">Lamina</th>
+                                <th class="col">Diagrama</th>
+                                <th class="col">description</th>
+                                <th class="col">Observaciones</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td colspan="4" class="text-center" [innerHTML]="conData"></td>
+                        </tr>
+                        <tbody *ngIf="whit_data">
+                            <tr *ngFor="let sparepart of sparepart_array;">
+                                <td>{{sparepart.equipment_id.name}}</td>
+                                <td>{{sparepart.equipment_id.serial_number}}</td>
+                                <td>{{sparepart.amount}}</td>
+                                <td>{{sparepart.lamina}}</td>
+                                <td>{{sparepart.diagram}}</td>
+                                <td>{{sparepart.description}}</td>
+                                <td>{{sparepart.observations}}</td>
+                                <td *ngIf="superUsuario || userAdministrador">
+                                    <button class="btn btn-primary" (click)="updateSparePart(sparepart)">Editar</button>
+                                    <button class="btn btn-danger" (click)="deleteSparePart(sparepart)">Borrar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

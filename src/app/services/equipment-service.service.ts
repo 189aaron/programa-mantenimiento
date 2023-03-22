@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthServiceService } from './auth-service.service';
 
 @Injectable({
@@ -10,10 +11,11 @@ export class EquipmentServiceService {
   path = 'http://127.0.0.1:8000/';
 
   constructor(
+    private router: Router,
     private loginService: AuthServiceService,
     private http: HttpClient) { }
 
-  add_equipment(unam_number: string, name: string, location: string, part_ship: string, trademark: string, model: string, type: string, serial_number: string, power: string, calibration_date: string, observations: string) {
+  add_equipment(unam_number: string, name: string, location: string, part_ship: string, trademark: string, model: string, type: string, ship: string, serial_number: string, power: string, calibration_date: string, observations: string, department_or_base: string) {
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -29,25 +31,30 @@ export class EquipmentServiceService {
       'trademark': trademark,
       'model': model,
       'type': type,
+      'ship': ship,
       'serial_number': serial_number,
       'power': power,
       'calibration_date': calibration_date,
-      'observations': observations
+      'observations': observations,
+      'department_or_base': department_or_base
     };
 
     return this.http.post(this.path + 'equipment/', body, httpOptions).subscribe({
       next: (response: any) => {
         alert('Equipo registrado correctamente');
+        this.router.navigate(['/home']);
       },
       error: (error: any) => {
-        console.log(error);
         if (error.error.code == 'token_not_valid'){
           alert('Caducó la sesión, por favor ingresa de nuevo');
           this.loginService.logout();
-        }else if (error.status == '401') {
+        }else if (error.status == '400') {
+          alert(JSON.stringify(error.error, null, 2));
+        } else if (error.status == '401'){
           alert(error.error.detail);
-        } else {
-          alert(JSON.stringify(error.error));
+          this.router.navigate(['/home']);
+        } else if (error.status == '500'){
+          alert('Error del servidor');
         }
         
       }

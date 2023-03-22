@@ -17,6 +17,7 @@
       <hr class="d-md-none">
       <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
         <li class="nav-item" *ngIf="id_token">
+          <a href="">{{user_cargo}}</a>
           <a class="nav-link p-2 link-primary" (click)="logout()">Salir</a>
         </li>
       </ul>

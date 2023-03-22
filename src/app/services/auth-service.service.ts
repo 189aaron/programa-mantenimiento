@@ -9,9 +9,9 @@ export class AuthServiceService {
 
   path = 'http://127.0.0.1:8000/';
   
-
   constructor(
-    private router: Router, private http: HttpClient) { }
+    private router: Router, 
+    private http: HttpClient) { }
 
   login(email: string, password: string) {
     const body = {
@@ -27,7 +27,6 @@ export class AuthServiceService {
   
     return this.http.post(this.path + 'auth/login/', body, httpOptions).subscribe({
       next: (response: any) => {
-        console.log(response);
         localStorage.setItem('position', response.position)
         localStorage.setItem('ship', response.ship)
         localStorage.setItem('id_token', response.tokens.access);
@@ -87,9 +86,8 @@ export class AuthServiceService {
     return localStorage.getItem('id_token')
   }
 
-
   logout() {
-    localStorage.removeItem("id_token");
+    localStorage.removeItem('id_token');
     return this.router.navigate(['/login']);
   }
 

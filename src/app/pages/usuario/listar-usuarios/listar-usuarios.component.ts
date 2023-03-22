@@ -25,6 +25,8 @@ export class ListarUsuariosComponent implements OnInit {
     let session = localStorage.getItem('position');
     if (session == null || session == undefined) {
       this.router.navigate(['/login']);
+    }else{
+      this.get_users();
     }
 
   }
@@ -63,17 +65,54 @@ export class ListarUsuariosComponent implements OnInit {
       this.users_array = data;
     } else {
       //no trae data
-      this.conData = `<h3 class="text-center py-5">Aun no tenemos datos que mostrarte <br> <a href="/register">Registrar un equipo</a></h3>`;
+      this.conData = 
+      `<h3 class="text-center py-3">
+        Aun no hay usuarios registrados<br>
+        ¿Deseas registrar un nuevo usuario? Haz click en el siguiente enlace
+        <a href="/register">Registrar Usuario</a>
+      </h3>`;
       this.whit_data = false;
     }
   }
 
   editarUsuario(usuario: any){
-    console.log(usuario);
+    window.location.href = 
+      'usuarios/editar-usuario?id=' + usuario.email+
+      '&name=' + usuario.name +
+      '&department_or_base=' + usuario.department_or_base +
+      '&ship=' + usuario.ship +
+      '&position=' + usuario.position;
   }
 
-  borrarUsuario(usuario: any){
-    console.log(usuario);
+  async borrarUsuario(usuario: any){
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('id_token')
+      }),
+      params: {
+        'email': usuario.email,
+      }
+    };
+
+    this.http.delete(this.loginService.path + 'auth/configure_users/', httpOptions).subscribe({
+      next: () => {
+        //implementar exito
+        alert('Usuario borrado con Exito\n Volverá a la pantalla inicial');
+        this.router.navigate(['/home']);
+      },
+      error: (error: any) => {
+        if (error.error.code == 'token_not_valid') {
+          alert('Caducó la sesión, por favor ingresa de nuevo');
+          this.loginService.logout();
+        }else if (error.status == '400') {
+          alert(error.error.detail);
+        } else if (error.status == '404') {
+          alert('Usuario no encontrado');
+        }
+      }
+    })
+
   }
 
 }

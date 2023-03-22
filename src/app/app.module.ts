@@ -19,6 +19,10 @@ import { ListarUsuariosComponent } from './pages/usuario/listar-usuarios/listar-
 import { RefreshTokenComponent } from './pages/usuario/refresh-token/refresh-token.component';
 import { ActualizarUsuarioComponent } from './pages/usuario/actualizar-usuario/actualizar-usuario.component';
 import { EliminarUsuarioComponent } from './pages/usuario/eliminar-usuario/eliminar-usuario.component';
+import { EditarEquipoComponent } from './pages/equipos/editar-equipo/editar-equipo.component';
+import { ConsultaRefaccionComponent } from './pages/refacciones/consulta-refaccion/consulta-refaccion.component';
+import { EditarRefaccionComponent } from './pages/refacciones/editar-refaccion/editar-refaccion.component';
+import { RegistarRefaccionComponent } from './pages/refacciones/registar-refaccion/registar-refaccion.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,11 @@ import { EliminarUsuarioComponent } from './pages/usuario/eliminar-usuario/elimi
     ListarUsuariosComponent,
     RefreshTokenComponent,
     ActualizarUsuarioComponent,
-    EliminarUsuarioComponent
+    EliminarUsuarioComponent,
+    EditarEquipoComponent,
+    ConsultaRefaccionComponent,
+    EditarRefaccionComponent,
+    RegistarRefaccionComponent
   ],
   imports: [
     BrowserModule,
