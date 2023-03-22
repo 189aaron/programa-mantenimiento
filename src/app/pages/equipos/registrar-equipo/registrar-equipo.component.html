@@ -17,8 +17,12 @@
                                 <input type="text" name="name" placeholder="" class="form-control" ngModel>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="locationLabel" class="form-label">Localización del equipo</label>
-                                <input type="text" name="location" placeholder="" class="form-control" ngModel>
+                                <label for="locationLabel" class="form-label">Departamento</label>
+                                <select class="form-select" name="location" ngModel>
+                                    <option value="MAQUINAS">Maquinas</option>
+                                    <option value="CUBIERTA">Cubierta</option>
+                                    <option value="ELECTRONICA">Electrónica</option>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="partShipSelect" class="form-label">Ubicación dentro del buque</label>
@@ -34,7 +38,13 @@
                                 <select id="buquePSU" class="form-select" name="ship" ngModel>
                                     <option value="EL PUMA">El Puma</option>
                                     <option value="JUSTO SIERRA">Justo Sierra</option>
-                                    <option value="AMBOS">Ambos</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" *ngIf="pSU">
+                                <label for="buquePSU" class="form-label">Departamento al que pertenece</label>
+                                <select id="buquePSU" class="form-select" name="department_or_base" ngModel>
+                                    <option value="DEPARTAMENTO MAQUINAS">Departamento Máquinas</option>
+                                    <option value="DEPARTAMENTO CUBIERTA">Departamento Cubiertas</option>
                                 </select>
                             </div>
                             <div class="form-group mb-3">
