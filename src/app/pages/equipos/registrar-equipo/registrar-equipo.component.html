@@ -16,36 +16,38 @@
                                 <label for="nameLabel" class="form-label">Nombre del equipo</label>
                                 <input type="text" name="name" placeholder="" class="form-control" ngModel>
                             </div>
-                            <div class="form-group mb-3">
-                                <label for="locationLabel" class="form-label">Departamento</label>
-                                <select class="form-select" name="location" ngModel>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" aria-label="Buque" name="location" ngModel>
                                     <option value="MAQUINAS">Maquinas</option>
                                     <option value="CUBIERTA">Cubierta</option>
                                     <option value="ELECTRONICA">Electrónica</option>
                                 </select>
+                                <label for="floatingSelect">Departamento</label>
                             </div>
-                            <div class="mb-3">
-                                <label for="partShipSelect" class="form-label">Ubicación dentro del buque</label>
-                                <select id="partShipSelect" class="form-select" name="part_ship" ngModel>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" aria-label="Ubicación dentro del buque" name="part_ship" ngModel>
                                     <option value="PROA">Proa</option>
                                     <option value="POPA">Popa</option>
                                     <option value="ESTRIBOR">Estribor</option>
                                     <option value="BABOR">Babor</option>
                                 </select>
+                                <label for="floatingSelect">Ubicación dentro del buque</label>
                             </div>
-                            <div class="mb-3" *ngIf="pSU">
-                                <label for="buquePSU" class="form-label">Navio al que pertenece</label>
+                            <div class="form-floating mb-3" *ngIf="pSU">
+                                
                                 <select id="buquePSU" class="form-select" name="ship" ngModel>
                                     <option value="EL PUMA">El Puma</option>
                                     <option value="JUSTO SIERRA">Justo Sierra</option>
                                 </select>
+                                <label for="floatingSelect">Navio al que pertenece</label>
                             </div>
-                            <div class="mb-3" *ngIf="pSU">
-                                <label for="buquePSU" class="form-label">Departamento al que pertenece</label>
+                            <div class="form-floating mb-3" *ngIf="pSU">
+                                
                                 <select id="buquePSU" class="form-select" name="department_or_base" ngModel>
                                     <option value="DEPARTAMENTO MAQUINAS">Departamento Máquinas</option>
                                     <option value="DEPARTAMENTO CUBIERTA">Departamento Cubiertas</option>
                                 </select>
+                                <label for="floatingSelect" class="form-label">Departamento al que pertenece</label>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="trademarkLabel" class="form-label">Marca del equipo</label>

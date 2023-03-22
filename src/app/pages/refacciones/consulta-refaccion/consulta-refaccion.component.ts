@@ -38,10 +38,8 @@ export class ConsultaRefaccionComponent implements OnInit {
     let superAdmin = localStorage.getItem('position');
     if (superAdmin == 'SUPERUSUARIO') {
       this.superUsuario = true;
-      console.log('Es super usuario');
     } else if (superAdmin == 'CAPITAN' || superAdmin == 'JEFE DE MAQUINAS') {
       this.userAdministrador = true;
-      console.log('Es administrador ' + superAdmin);
     }
   }
 
@@ -82,8 +80,8 @@ export class ConsultaRefaccionComponent implements OnInit {
       this.conData =
         `<h3 class="text-center py-3">
           Aun no tenemos datos que mostrarte<br>
-          ¿Deseas registrar un equipo? Haz click en el siguiente enlace<br>
-          <a href="/equipos/registrar">Registrar un equipo</a>
+          ¿Deseas registrar una refacción? Haz click en el siguiente enlace y selecciona "Registrar Refacciones" (botón color verde) del equipo al cual deseas agregar una nueva refacción<br>
+          <a href="/equipos/consultar">Registrar refacción</a>
         </h3>`;
       this.whit_data = false;
     }
@@ -108,7 +106,6 @@ export class ConsultaRefaccionComponent implements OnInit {
   }
 
   async deleteSparePart(sparepart: any) {
-    console.log(sparepart)
 
     let httpOptions = {
       headers: new HttpHeaders({
@@ -118,7 +115,7 @@ export class ConsultaRefaccionComponent implements OnInit {
       params: {
         'id': sparepart.id,
       },
-      body:{
+      body: {
         "serial_number": sparepart.equipment_id.serial_number
       }
     };

@@ -37,7 +37,7 @@
                                 <td>{{sparepart.description}}</td>
                                 <td>{{sparepart.observations}}</td>
                                 <td *ngIf="superUsuario || userAdministrador">
-                                    <button class="btn btn-primary" (click)="updateSparePart(sparepart)">Editar</button>
+                                    <button class="btn btn-warning" (click)="updateSparePart(sparepart)">Editar</button>
                                     <button class="btn btn-danger" (click)="deleteSparePart(sparepart)">Borrar</button>
                                 </td>
                             </tr>

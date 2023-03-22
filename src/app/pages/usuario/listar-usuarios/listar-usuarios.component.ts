@@ -52,6 +52,8 @@ export class ListarUsuariosComponent implements OnInit {
           alert(error.error.detail);
         } else if (error.status == '403') {
           alert(error.error.detail);
+        } else {
+          alert(JSON.stringify(error.error, null, 2));
         }
       }
     })

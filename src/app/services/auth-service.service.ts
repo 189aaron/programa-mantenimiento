@@ -119,7 +119,7 @@ export class AuthServiceService {
           alert('Caducó la sesión, por favor ingresa de nuevo');
           this.logout();
         }
-        alert(JSON.stringify(error));
+        alert(JSON.stringify(error.error, null, 2));
       }
     });
 

@@ -45,14 +45,13 @@
                                 <td>{{equipo.power}}</td>
                                 <td>{{equipo.calibration_date}}</td>
                                 <td>{{equipo.observations}}</td>
-                                <!--TODO revisar estos permisos para que aparezcan correctamente-->
                                 <td *ngIf="superUsuario == false && userAdministrador == false">
                                     <button class="btn btn-primary" (click)="getSparePart(equipo)">Consultar Refacciones</button>
                                 </td>
                                 <td *ngIf="superUsuario || userAdministrador">
-                                    <button class="btn btn-primary" (click)="addSparePart(equipo)">Registrar Refacciones</button>
-                                    <button class="btn btn-primary" (click)="getSparePart(equipo)">Consultar Refacciones</button>
-                                    <button class="btn btn-primary" (click)="updateEquipment(equipo)">Editar</button>
+                                    <button class="btn btn-success btn-sm" (click)="addSparePart(equipo)">Registrar Refacciones</button>
+                                    <button class="btn btn-primary btn-sm" (click)="getSparePart(equipo)">Consultar Refacciones</button>
+                                    <button class="btn btn-warning" (click)="updateEquipment(equipo)">Editar</button>
                                     <button class="btn btn-danger" (click)="deleteEquipment(equipo)">Borrar</button>
                                 </td>
                             </tr>
