@@ -8,6 +8,7 @@ import { AuthServiceService } from 'src/app/services/auth-service.service';
 })
 export class HeaderComponent implements OnInit {
   user_cargo:string = '';
+  ship:string = '';
 
   constructor(public loginService:AuthServiceService,) { }
 
@@ -15,8 +16,15 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     let cargoAux = localStorage.getItem('position');
-    if(cargoAux != null || cargoAux != cargoAux){
+    if(cargoAux != null){
       this.user_cargo = cargoAux;
+    }
+    let shipAux = localStorage.getItem('ship');
+    if(shipAux != null){
+      if (shipAux == 'AMBOS'){
+        shipAux = 'AMBOS BUQUES';
+      }
+      this.ship = shipAux;
     }
     
   }

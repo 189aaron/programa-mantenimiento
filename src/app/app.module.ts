@@ -10,7 +10,7 @@ import { FooterComponent } from './component/footer/footer.component';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './pages/home/home.component';
 import { RegistrarEquipoComponent } from './pages/equipos/registrar-equipo/registrar-equipo.component';
@@ -48,6 +48,7 @@ import { RegistarRefaccionComponent } from './pages/refacciones/registar-refacci
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [],

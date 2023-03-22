@@ -46,7 +46,7 @@
                                 <td>{{equipo.calibration_date}}</td>
                                 <td>{{equipo.observations}}</td>
                                 <!--TODO revisar estos permisos para que aparezcan correctamente-->
-                                <td *ngIf="superUsuario == false || !userAdministrador == false">
+                                <td *ngIf="superUsuario == false && userAdministrador == false">
                                     <button class="btn btn-primary" (click)="getSparePart(equipo)">Consultar Refacciones</button>
                                 </td>
                                 <td *ngIf="superUsuario || userAdministrador">

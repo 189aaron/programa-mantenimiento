@@ -40,7 +40,8 @@ export class AuthServiceService {
         if (error.status == '500') {
           alert(error.error);
         } else {
-          alert(error.error.detail);
+          console.log(error)
+          alert(JSON.stringify(error.error, null, 2));
         }
 
       }
