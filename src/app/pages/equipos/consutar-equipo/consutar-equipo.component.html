@@ -49,6 +49,7 @@
                                     <button class="btn btn-primary" (click)="getSparePart(equipo)">Consultar Refacciones</button>
                                 </td>
                                 <td *ngIf="superUsuario || userAdministrador">
+                                    <!--TODO cambiar por los colores en el style intercalando el azul y oro-->
                                     <button class="btn btn-success btn-sm" (click)="addSparePart(equipo)">Registrar Refacciones</button>
                                     <button class="btn btn-primary btn-sm" (click)="getSparePart(equipo)">Consultar Refacciones</button>
                                     <button class="btn btn-warning" (click)="updateEquipment(equipo)">Editar</button>

@@ -79,7 +79,7 @@ export class ConsutarEquipoComponent implements OnInit {
         `<h3 class="text-center py-3">
           Aun no tenemos datos que mostrarte<br>
           ¿Deseas registrar un equipo? Haz click en el siguiente enlace<br>
-          <a href="/equipos/registrar">Registrar un equipo</a>
+          <a href="#/equipos/registrar">Registrar un equipo</a>
         </h3>`;
       this.whit_data = false;
     }

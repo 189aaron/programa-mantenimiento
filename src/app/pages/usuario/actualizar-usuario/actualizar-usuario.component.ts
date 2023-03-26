@@ -65,6 +65,9 @@ export class ActualizarUsuarioComponent implements OnInit {
           this.loginService.logout();
         }else if (error.status == '400') {
           alert(error.error.detail);
+        } else if (error.status == '403') {
+          alert(error.error.detail);
+          this.router.navigate(['/home']);
         } else if (error.status == '404') {
           alert('Usuario no encontrado');
         }
@@ -81,7 +84,7 @@ export class ActualizarUsuarioComponent implements OnInit {
       this.equipment_array = data;
     } else {
       //no trae data
-      this.conData = `<h3 class="text-center py-5">Aun no tenemos datos que mostrarte <br> <a href="/register">Registrar un equipo</a></h3>`;
+      this.conData = `<h3 class="text-center py-5">Aun no tenemos datos que mostrarte <br> <a href="#/register">Registrar un equipo</a></h3>`;
       this.whit_data = false;
     }
   }

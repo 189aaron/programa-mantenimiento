@@ -81,7 +81,7 @@ export class ConsultaRefaccionComponent implements OnInit {
         `<h3 class="text-center py-3">
           Aun no tenemos datos que mostrarte<br>
           ¿Deseas registrar una refacción? Haz click en el siguiente enlace y selecciona "Registrar Refacciones" (botón color verde) del equipo al cual deseas agregar una nueva refacción<br>
-          <a href="/equipos/consultar">Registrar refacción</a>
+          <a href="#/equipos/consultar">Registrar refacción</a>
         </h3>`;
       this.whit_data = false;
     }

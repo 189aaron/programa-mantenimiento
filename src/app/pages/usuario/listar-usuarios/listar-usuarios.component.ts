@@ -52,6 +52,7 @@ export class ListarUsuariosComponent implements OnInit {
           alert(error.error.detail);
         } else if (error.status == '403') {
           alert(error.error.detail);
+          this.router.navigate(['/home']);
         } else {
           alert(JSON.stringify(error.error, null, 2));
         }
@@ -71,7 +72,7 @@ export class ListarUsuariosComponent implements OnInit {
       `<h3 class="text-center py-3">
         Aun no hay usuarios registrados<br>
         ¿Deseas registrar un nuevo usuario? Haz click en el siguiente enlace
-        <a href="/register">Registrar Usuario</a>
+        <a href="#/register">Registrar Usuario</a>
       </h3>`;
       this.whit_data = false;
     }
