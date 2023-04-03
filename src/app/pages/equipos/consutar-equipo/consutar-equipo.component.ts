@@ -77,8 +77,9 @@ export class ConsutarEquipoComponent implements OnInit {
       //no trae data
       this.conData =
         `<h3 class="text-center py-3">
-          Aun no tenemos datos que mostrarte<br>
-          ¿Deseas registrar un equipo? Haz click en el siguiente enlace<br>
+          Aun no tenemos datos que mostrarte <br>
+          ¿Deseas registrar un equipo? <br> 
+          Haz click en el siguiente enlace<br>
           <a href="#/equipos/registrar">Registrar un equipo</a>
         </h3>`;
       this.whit_data = false;
@@ -87,13 +88,13 @@ export class ConsutarEquipoComponent implements OnInit {
 
   addSparePart(equipo: any){
     window.location.href = 
-      'refacciones/registrar?serial_number=' + equipo.serial_number +
+      '#/refacciones/registrar?serial_number=' + equipo.serial_number +
       '&equipment_id=' + equipo.id;
   }
 
   updateEquipment(equipo: any) {
     window.location.href = 
-      'equipos/editar-equipo?serial_number=' + equipo.serial_number +
+      '#/equipos/editar-equipo?serial_number=' + equipo.serial_number +
       '&unam_number=' + equipo.unam_number +
       '&name=' + equipo.name+
       '&location=' + equipo.location+
@@ -110,7 +111,7 @@ export class ConsutarEquipoComponent implements OnInit {
 
   getSparePart(equipo: any){
     window.location.href = 
-      'refacciones/consultar?serial_number=' + equipo.serial_number;
+      '#/refacciones/consultar?serial_number=' + equipo.serial_number;
   }
 
   async deleteEquipment(equipo: any) {

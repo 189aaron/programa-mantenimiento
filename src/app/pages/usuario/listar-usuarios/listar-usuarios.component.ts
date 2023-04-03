@@ -71,16 +71,20 @@ export class ListarUsuariosComponent implements OnInit {
       this.conData = 
       `<h3 class="text-center py-3">
         Aun no hay usuarios registrados<br>
-        ¿Deseas registrar un nuevo usuario? Haz click en el siguiente enlace
+        ¿Deseas registrar un nuevo usuario?<br>
+        Haz click en el siguiente enlace
+       </h3>
+       <h4>
         <a href="#/register">Registrar Usuario</a>
-      </h3>`;
+       </h4>
+       `;
       this.whit_data = false;
     }
   }
 
   editarUsuario(usuario: any){
     window.location.href = 
-      'usuarios/editar-usuario?id=' + usuario.email+
+      '#/usuarios/editar-usuario?id=' + usuario.email+
       '&name=' + usuario.name +
       '&department_or_base=' + usuario.department_or_base +
       '&ship=' + usuario.ship +

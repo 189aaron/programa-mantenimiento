@@ -78,10 +78,11 @@ export class ConsultaRefaccionComponent implements OnInit {
     } else {
       //no trae data
       this.conData =
-        `<h3 class="text-center py-3">
+        `<h3 class="text-center pt-3">
           Aun no tenemos datos que mostrarte<br>
-          ¿Deseas registrar una refacción? Haz click en el siguiente enlace y selecciona "Registrar Refacciones" (botón color verde) del equipo al cual deseas agregar una nueva refacción<br>
-          <a href="#/equipos/consultar">Registrar refacción</a>
+          ¿Deseas registrar una refacción?<br>
+           Haz click en el siguiente enlace<br>
+           <a href="#/equipos/consultar">Registrar refacción</a>
         </h3>`;
       this.whit_data = false;
     }
@@ -89,7 +90,7 @@ export class ConsultaRefaccionComponent implements OnInit {
 
   updateSparePart(sparepart: any) {
     window.location.href =
-      'refacciones/editar-refaccion?serial_number=' + sparepart.equipment_id.serial_number +
+      '#/refacciones/editar-refaccion?serial_number=' + sparepart.equipment_id.serial_number +
       '&equipment_id=' + sparepart.equipment_id +
       '&amount=' + sparepart.amount +
       '&description=' + sparepart.description +

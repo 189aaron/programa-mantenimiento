@@ -15,16 +15,17 @@ export class EquipmentServiceService {
     private loginService: AuthServiceService,
     private http: HttpClient) { }
 
-  add_equipment(unam_number: string, name: string, location: string, part_ship: string, trademark: string, model: string, type: string, ship: string, serial_number: string, power: string, calibration_date: string, observations: string, department_or_base: string) {
+  add_equipment(group_no: string, name: string, location: string, part_ship: string, trademark: string, model: string, type: string, ship: string, serial_number: string, power: string, calibration_date: string, observations: string, department_or_base: string) {
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('id_token')
       })
     };
-
+    
+    console.log(calibration_date)
     const body = {
-      'unam_number': unam_number,
+      'group_no': group_no,
       'name': name,
       'location': location,
       'part_ship': part_ship,

@@ -39,8 +39,9 @@ export class AuthServiceService {
       error: (error: any) => {
         if (error.status == '500') {
           alert(error.error);
+        } else if (error.status == '401') {
+          alert(error.error.detail);
         } else {
-          console.log(error)
           alert(JSON.stringify(error.error, null, 2));
         }
 

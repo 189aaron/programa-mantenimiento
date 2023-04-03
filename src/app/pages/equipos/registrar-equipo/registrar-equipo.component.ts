@@ -33,7 +33,8 @@ export class RegistrarEquipoComponent implements OnInit {
   }
 
   add_equipment(form: NgForm) {
-    const unam_number = form.value.unam_number;
+    let  calibration_date = '';
+    const group_no = form.value.group_no;
     const name = form.value.name;
     const location = form.value.location;
     const part_ship = form.value.part_ship;
@@ -48,7 +49,13 @@ export class RegistrarEquipoComponent implements OnInit {
     const observations = form.value.observations;
     const department_or_base = form.value.department_or_base;
     
-    this.equipmentService.add_equipment(unam_number, name, location, part_ship, trademark, model, type, ship, serial_number, power, calibration_date_date + 'T' + calibration_date_time, observations, department_or_base);
+    if (calibration_date_date == '' || calibration_date_time == ''){
+      calibration_date == '';
+    }else{
+      calibration_date = calibration_date_date + 'T' + calibration_date_time;
+    }
+    console.log(calibration_date)
+    this.equipmentService.add_equipment(group_no, name, location, part_ship, trademark, model, type, ship, serial_number, power, calibration_date, observations, department_or_base);
   }
 
 }
