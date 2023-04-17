@@ -23,6 +23,7 @@ import { EditarEquipoComponent } from './pages/equipos/editar-equipo/editar-equi
 import { ConsultaRefaccionComponent } from './pages/refacciones/consulta-refaccion/consulta-refaccion.component';
 import { EditarRefaccionComponent } from './pages/refacciones/editar-refaccion/editar-refaccion.component';
 import { RegistarRefaccionComponent } from './pages/refacciones/registar-refaccion/registar-refaccion.component';
+import { ContraseniaComponent } from './pages/contrasenia/contrasenia.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { RegistarRefaccionComponent } from './pages/refacciones/registar-refacci
     EditarEquipoComponent,
     ConsultaRefaccionComponent,
     EditarRefaccionComponent,
-    RegistarRefaccionComponent
+    RegistarRefaccionComponent,
+    ContraseniaComponent
   ],
   imports: [
     BrowserModule,

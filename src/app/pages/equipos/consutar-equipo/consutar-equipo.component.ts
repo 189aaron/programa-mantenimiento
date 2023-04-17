@@ -31,10 +31,8 @@ export class ConsutarEquipoComponent implements OnInit {
       let superAdmin = localStorage.getItem('position');
       if (superAdmin == 'SUPERUSUARIO') {
         this.superUsuario = true;
-        console.log('Es super usuario');
       } else if (superAdmin == 'CAPITAN' || superAdmin == 'JEFE DE MAQUINAS') {
         this.userAdministrador = true;
-        console.log('Es administrador ' + superAdmin);
       }
       this.get_equipment();
     }
@@ -95,7 +93,7 @@ export class ConsutarEquipoComponent implements OnInit {
   updateEquipment(equipo: any) {
     window.location.href = 
       '#/equipos/editar-equipo?serial_number=' + equipo.serial_number +
-      '&unam_number=' + equipo.unam_number +
+      '&group_no=' + equipo.group_no +
       '&name=' + equipo.name+
       '&location=' + equipo.location+
       '&part_ship=' + equipo.part_ship+
@@ -115,7 +113,6 @@ export class ConsutarEquipoComponent implements OnInit {
   }
 
   async deleteEquipment(equipo: any) {
-    console.log(equipo.serial_number)
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

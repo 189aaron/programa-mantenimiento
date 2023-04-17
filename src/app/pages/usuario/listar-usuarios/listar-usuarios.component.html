@@ -6,8 +6,7 @@
         <div class="row">
             <div class="col"></div>
             <div class="col">
-                <!--<p class="text-end me-5"><button type="submit" class="btn btn-primary btn-lg"
-                        (click)="get_users()">Obtener listado</button></p>-->
+                
             </div>
         </div>
         <div class="row pt-3 text-center">
@@ -22,6 +21,7 @@
                                 <th class="col">Buque</th>
                                 <th class="col">Posición</th>
                                 <th class="col">Fecha Alta</th>
+                                <th class="col">Verificado</th>
                                 <th class="col">Eliminado</th>
                             </tr>
                         </thead>
@@ -36,10 +36,11 @@
                                 <td>{{usuario.ship}}</td>
                                 <td>{{usuario.position}}</td>
                                 <td>{{usuario.created_at}}</td>
+                                <td>{{usuario.is_verified}}</td>
                                 <td>{{usuario.status_delete}}</td>
                                 <td>
-                                    <button class="btn btn-warning" (click)="editarUsuario(usuario)">Editar</button>
-                                    <button class="btn btn-danger" (click)="borrarUsuario(usuario)">Borrar</button>
+                                    <button class="btn btn-azul" (click)="editarUsuario(usuario)">Editar</button>
+                                    <button class="btn btn-oro" (click)="borrarUsuario(usuario)">Borrar</button>
                                 </td>
                             </tr>
                         </tbody>

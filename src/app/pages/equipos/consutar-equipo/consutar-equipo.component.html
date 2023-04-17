@@ -4,10 +4,8 @@
         <h3 class="ms-5 pt-3">Consulta de Equipos MS-1</h3>
         <div class="row">
             <div class="col"></div>
-            <div class="col"><!--
-                <p class="text-end me-5">
-                    <button type="submit" class="btn btn-primary btn-lg" (click)="get_equipment()">Obtener listado</button>
-                </p>-->
+            <div class="col">
+                
             </div>
         </div>
         <div class="row pt-3">
@@ -27,6 +25,7 @@
                                 <th class="col">Potencia</th>
                                 <th class="col">Fecha de calibración</th>
                                 <th class="col">Observaciones</th>
+                                <th *ngIf="superUsuario" class="col">Buque Oceanografico</th>
                             </tr>
                         </thead>
                         <tr>
@@ -34,7 +33,7 @@
                         </tr>
                         <tbody *ngIf="whit_data">
                             <tr *ngFor="let equipo of equipment_array;">
-                                <td>{{equipo.unam_number}}</td>
+                                <td>{{equipo.group_no}}</td>
                                 <td>{{equipo.name}}</td>
                                 <td>{{equipo.location}}</td>
                                 <td>{{equipo.part_ship}}</td>
@@ -45,15 +44,16 @@
                                 <td>{{equipo.power}}</td>
                                 <td>{{equipo.calibration_date}}</td>
                                 <td>{{equipo.observations}}</td>
+                                <td *ngIf="superUsuario">{{equipo.ship}}</td>
                                 <td *ngIf="superUsuario == false && userAdministrador == false">
                                     <button class="btn btn-primary" (click)="getSparePart(equipo)">Consultar Refacciones</button>
                                 </td>
                                 <td *ngIf="superUsuario || userAdministrador">
                                     <!--TODO cambiar por los colores en el style intercalando el azul y oro-->
-                                    <button class="btn btn-success btn-sm" (click)="addSparePart(equipo)">Registrar Refacciones</button>
-                                    <button class="btn btn-primary btn-sm" (click)="getSparePart(equipo)">Consultar Refacciones</button>
-                                    <button class="btn btn-warning" (click)="updateEquipment(equipo)">Editar</button>
-                                    <button class="btn btn-danger" (click)="deleteEquipment(equipo)">Borrar</button>
+                                    <button class="btn btn-azul btn-sm" (click)="addSparePart(equipo)">Registrar Refacciones</button>
+                                    <button class="btn btn-oro btn-sm" (click)="getSparePart(equipo)">Consultar Refacciones</button>
+                                    <button class="btn btn-azul" (click)="updateEquipment(equipo)">Editar</button>
+                                    <button class="btn btn-oro" (click)="deleteEquipment(equipo)">Borrar</button>
                                 </td>
                             </tr>
                         </tbody>

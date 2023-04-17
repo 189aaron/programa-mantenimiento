@@ -41,7 +41,6 @@ export class ListarUsuariosComponent implements OnInit {
 
     this.http.get(this.path + 'auth/list_users/', httpOptions).subscribe({
       next: (response: any) => {
-        console.log(response);
         this.get_list_users(response);
       },
       error: (error: any) => {
@@ -72,11 +71,9 @@ export class ListarUsuariosComponent implements OnInit {
       `<h3 class="text-center py-3">
         Aun no hay usuarios registrados<br>
         ¿Deseas registrar un nuevo usuario?<br>
-        Haz click en el siguiente enlace
-       </h3>
-       <h4>
+        Haz click en el siguiente enlace<br>
         <a href="#/register">Registrar Usuario</a>
-       </h4>
+       </h3>
        `;
       this.whit_data = false;
     }

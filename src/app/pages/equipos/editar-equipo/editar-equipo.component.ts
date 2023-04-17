@@ -11,7 +11,7 @@ import { AuthServiceService } from 'src/app/services/auth-service.service';
 export class EditarEquipoComponent implements OnInit {
   pSU: boolean = false;
   serial_number = '';
-  unam_number = '';
+  group_no = '';
   name = '';
   location = '';
   part_ship = '';
@@ -35,7 +35,7 @@ export class EditarEquipoComponent implements OnInit {
   ngOnInit(): void {
     // Obtiene el valor del parámetro de consulta "serial_number"  
     this.serial_number = this.route.snapshot.queryParams['serial_number'];
-    this.unam_number = this.route.snapshot.queryParams['unam_number'];
+    this.group_no = this.route.snapshot.queryParams['group_no'];
     this.name = this.route.snapshot.queryParams['name'];
     this.location = this.route.snapshot.queryParams['location'];
     this.part_ship = this.route.snapshot.queryParams['part_ship'];
@@ -58,12 +58,10 @@ export class EditarEquipoComponent implements OnInit {
     let superAdmin = localStorage.getItem('position');
       if (superAdmin == 'SUPERUSUARIO') {
         this.pSU = true;
-        console.log('Es super usuario');
       } 
   }
 
   async updateEquipment(form: NgForm) {
-    console.log(form.value)
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -75,7 +73,7 @@ export class EditarEquipoComponent implements OnInit {
     };
 
     const body = {
-      'unam_number': form.value.unam_number,
+      'group_no': form.value.group_no,
       'name': form.value.name,
       'location': form.value.location,
       'part_ship': form.value.part_ship,

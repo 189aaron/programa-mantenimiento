@@ -23,7 +23,6 @@ export class EquipmentServiceService {
       })
     };
     
-    console.log(calibration_date)
     const body = {
       'group_no': group_no,
       'name': name,

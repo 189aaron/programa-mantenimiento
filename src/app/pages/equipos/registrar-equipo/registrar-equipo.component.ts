@@ -50,11 +50,11 @@ export class RegistrarEquipoComponent implements OnInit {
     const department_or_base = form.value.department_or_base;
     
     if (calibration_date_date == '' || calibration_date_time == ''){
-      calibration_date == '';
+      calibration_date = '1900-01-01T00:00'; //para no enviar vacio al backend
     }else{
       calibration_date = calibration_date_date + 'T' + calibration_date_time;
     }
-    console.log(calibration_date)
+    
     this.equipmentService.add_equipment(group_no, name, location, part_ship, trademark, model, type, ship, serial_number, power, calibration_date, observations, department_or_base);
   }
 

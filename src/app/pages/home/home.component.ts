@@ -21,10 +21,8 @@ export class HomeComponent implements OnInit {
     let superAdmin = localStorage.getItem('position');
     if( superAdmin == 'SUPERUSUARIO'){
       this.superUsuario = true;
-      console.log('Es super usuario');
     }else if( superAdmin == 'CAPITAN' || superAdmin == 'JEFE DE MAQUINAS'){
       this.userAdministrador = true;
-      console.log('Es administrador '+superAdmin);
     }
   }
 

@@ -36,7 +36,6 @@ export class ActualizarUsuarioComponent implements OnInit {
   }
 
   async updateUser(form: NgForm){
-    console.log(form.value)
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -56,15 +55,16 @@ export class ActualizarUsuarioComponent implements OnInit {
 
     this.http.put(this.loginService.path + 'auth/configure_users/', body, httpOptions).subscribe({
       next: (response: any) => {
-        alert('Usuario actulizado con exito');
+        alert('Usuario actualizado con exito');
         this.router.navigate(['/home']);
       },
       error: (error: any) => {
+        console.log(error)
         if (error.error.code == 'token_not_valid') {
           alert('Caducó la sesión, por favor ingresa de nuevo');
           this.loginService.logout();
         }else if (error.status == '400') {
-          alert(error.error.detail);
+          alert(error.error.non_field_errors);
         } else if (error.status == '403') {
           alert(error.error.detail);
           this.router.navigate(['/home']);

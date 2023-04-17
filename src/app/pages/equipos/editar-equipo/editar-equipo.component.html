@@ -4,25 +4,21 @@
         <div class="row pt-5">
             <div class="col-sm-8 col-md-6 col-lg-6 col-xl-4 mx-auto">
                 <div class="card bg-light mb-3">
-                    <div class="card-header text-center">Registrar Equipo</div>
+                    <div class="card-header text-center">Editar Equipo</div>
                     <div class="card-body">
                         <form novalidate class="form-group p-2" #formRegisterEquipment="ngForm"
                         (ngSubmit)="updateEquipment(formRegisterEquipment)">
                         <div class="form-group mb-3">
                             <label for="unamNumberLabel" class="form-label">Número de inventario</label>
-                            <input type="text" name="unam_number" placeholder="" class="form-control" [(ngModel)]="unam_number">
+                            <input type="text" name="group_no" placeholder="" class="form-control" [(ngModel)]="group_no">
                         </div>
                         <div class="form-group mb-3">
                             <label for="nameLabel" class="form-label">Nombre del equipo</label>
                             <input type="text" name="name" placeholder="" class="form-control" [(ngModel)]="name">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="locationLabel" class="form-label">Departamento</label>
-                            <select class="form-select" name="location" [(ngModel)]="location">
-                                <option value="MAQUINAS">Maquinas</option>
-                                <option value="CUBIERTA">Cubierta</option>
-                                <option value="ELECTRONICA">Electrónica</option>
-                            </select>
+                            <label for="locationLabel" class="form-label">Localización</label>
+                            <input type="text" name="location" placeholder="" class="form-control" [(ngModel)]="location">
                         </div>
                         <div class="mb-3">
                             <label for="partShipSelect" class="form-label">Ubicación dentro del buque</label>
@@ -81,7 +77,7 @@
                             [(ngModel)]="observations"></textarea>
                         </div>
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-lg">Registrar</button>
+                            <button type="submit" class="btn btn-primary btn-lg">Modificar</button>
                         </div>
                     </form>
                     </div>

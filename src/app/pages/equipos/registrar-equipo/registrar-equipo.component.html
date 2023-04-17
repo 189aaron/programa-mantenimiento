@@ -9,20 +9,16 @@
                         <form novalidate class="form-group p-2" #formRegisterEquipment="ngForm"
                             (ngSubmit)="add_equipment(formRegisterEquipment)">
                             <div class="form-group mb-3">
-                                <label for="unamNumberLabel" class="form-label">Número de inventario</label>
+                                <label for="unamNumberLabel" class="form-label">Número de grupo</label>
                                 <input type="text" name="group_no" placeholder="" class="form-control" ngModel>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="nameLabel" class="form-label">Nombre del equipo</label>
                                 <input type="text" name="name" placeholder="" class="form-control" ngModel>
                             </div>
-                            <div class="form-floating mb-3">
-                                <select class="form-select" aria-label="Buque" name="location" ngModel>
-                                    <option value="MAQUINAS">Maquinas</option>
-                                    <option value="CUBIERTA">Cubierta</option>
-                                    <option value="ELECTRONICA">Electrónica</option>
-                                </select>
-                                <label for="floatingSelect">Departamento</label>
+                            <div class="form-group mb-3">
+                                <label for="locationLabel" class="form-label">Localización</label>
+                                <input type="text" name="location" placeholder="" class="form-control" ngModel>
                             </div>
                             <div class="form-floating mb-3">
                                 <select class="form-select" aria-label="Ubicación dentro del buque" name="part_ship" ngModel>

@@ -65,23 +65,18 @@ export class AuthServiceService {
 
     return this.http.get(this.path + 'auth/refresh-token/', httpOptions).subscribe({
       next: (response: any) => {
-        console.log(response['0'])
-        /*TODO: revisar
-        localStorage.setItem('id_token', response.tokens.access);
-        if (localStorage.getItem('id_token') != "null") {
-          this.router.navigate(['/home']);
-
-        } else {
-          alert('El correo no se ha registrado o el correo ya se activó');
-        }*/
         alert(response + '\nSerás redirigido al inicio')
         this.router.navigate(['/login']);
       },
       error: (error: any) => {
         console.error(error.error);
-        if (error.status == '403') {
+        if (error.status == '400') {
+          alert(error.error);
+        } else if (error.status == '403') {
           alert(error.error.detail);
           this.router.navigate(['/login']);
+        } else if (error.status == '404') {
+          alert(error.error);
         } else {
           alert(error.error);
           this.router.navigate(['/login']);
@@ -143,5 +138,55 @@ export class AuthServiceService {
 
 
   }
+
+  changePassword(email: string, password: string) {
+    const body = {
+      'password': password
+    };
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('id_token'),
+      }),
+      params: {
+        'email': email,
+      }
+    };
+
+
+
+    return this.http.put(this.path + 'auth/change_password/', body, httpOptions).subscribe({
+      next: (response: any) => {
+        if (localStorage.getItem('id_token') != "null") {
+          this.router.navigate(['/home']);
+        }
+
+        if (response.message == 'Password changed'){
+          alert(response.message);
+        } else {
+          alert(response.message);
+        }
+
+        
+      },
+      error: (error: any) => {
+        if (error.status == '500') {
+          alert(error.error);
+        } else if (error.status == '400') {
+          alert(error.error);
+        } else if (error.status == '401') {
+          alert(error.error.detail);
+          this.logout();
+        } else {
+          alert(JSON.stringify(error.error, null, 2));
+        }
+
+      }
+    });
+
+
+  }
+
 
 }

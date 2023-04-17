@@ -15,6 +15,7 @@ import { EditarEquipoComponent } from './pages/equipos/editar-equipo/editar-equi
 import { ConsultaRefaccionComponent } from './pages/refacciones/consulta-refaccion/consulta-refaccion.component';
 import { EditarRefaccionComponent } from './pages/refacciones/editar-refaccion/editar-refaccion.component';
 import { RegistarRefaccionComponent } from './pages/refacciones/registar-refaccion/registar-refaccion.component';
+import { ContraseniaComponent } from './pages/contrasenia/contrasenia.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'usuarios/consultar', component: ListarUsuariosComponent },
   { path: 'usuarios/editar-usuario', component: ActualizarUsuarioComponent},
   { path: 'usuarios/eliminar', component: EliminarUsuarioComponent},
+  { path: 'usuarios/restablecer_contraseña', component: ContraseniaComponent},
   { path: 'usuarios/renviar_token', component: RefreshTokenComponent },
   { path: 'equipos/registrar', component: RegistrarEquipoComponent },
   { path: 'equipos/consultar', component: ConsutarEquipoComponent },

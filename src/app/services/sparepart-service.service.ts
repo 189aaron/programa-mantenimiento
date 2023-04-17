@@ -15,7 +15,7 @@ export class SparepartServiceService {
     private loginService: AuthServiceService,
     private http: HttpClient) { }
 
-    add_sparepart(serial_number: string, equipment_id: string, amount: string, description: string, position: string, num_part: string, num_ref: string, lamina: string, item: string, diagram: string, plano: string,model: string,observations: string) {
+    add_sparepart(serial_number: string, equipment_id: string, amount: string, description: string, position: string, num_part: string, num_ref: string, sheet_diagram: string, item: string, plano: string,model: string,observations: string) {
       let httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -33,9 +33,8 @@ export class SparepartServiceService {
         'position': position,
         'num_part': num_part,
         'num_ref': num_ref,
-        'lamina': lamina,
+        'sheet_diagram': sheet_diagram,
         'item': item,
-        'diagram': diagram,
         'plano': plano,
         'model': model,
         'observations': observations

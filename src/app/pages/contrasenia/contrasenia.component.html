@@ -1,0 +1,41 @@
+<app-header></app-header>
+<section class="py-5">
+    <div class="container-fluid justify-content-center py-5">
+        <h3 class="ms-5 pt-3">Restablecer contraseña</h3>
+        <div class="row">
+            <div class="col-sm-8 col-md-6 col-lg-6 col-xl-4 mx-auto pt-3 pt-md-0">
+                <div class="card text-center bg-light mb-3">
+                    <div class="card-header">Ingresa correo y contraseña</div>
+                    <div class="card-body">
+                        <form [formGroup]="restablecerForm" (ngSubmit)="onSubmit()" autocomplete="off">
+                            <div class="form-group mb-3">
+                                <input type="email" name="email" placeholder="Correo electrónico" class="form-control" formControlName="email">
+                                <div *ngIf="restablecerForm.get('email')?.invalid  && (restablecerForm.get('email')?.dirty || restablecerForm.get('email')?.touched)" class="text-danger">
+                                    <div *ngIf="restablecerForm.get('email')!.errors!['required']">
+                                        Correo es requerido.
+                                    </div>
+                                    <div *ngIf="restablecerForm.get('email')!.errors!['email']">
+                                        El correo electrónico debe ser una dirección de correo electrónico válida.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="password" name="password" placeholder="Contraseña" class="form-control" formControlName="password">
+                                <div *ngIf="restablecerForm.get('password')?.invalid && (restablecerForm.get('password')?.dirty || restablecerForm.get('password')?.touched)" class="text-danger">
+                                    <div *ngIf="restablecerForm.get('password')!.errors!['required']">
+                                        Contraseña es requerida.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">Cambiar Contraseña</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</section>
+<app-footer></app-footer>

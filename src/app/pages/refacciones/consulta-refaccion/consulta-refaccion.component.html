@@ -5,8 +5,7 @@
         <div class="row">
             <div class="col"></div>
             <div class="col">
-                <!--<p class="text-end me-5"><button type="submit" class="btn btn-primary btn-lg"
-                        (click)="get_sparepart()">Obtener listado</button></p>-->
+                
             </div>
         </div>
         <div class="row pt-3">
@@ -17,28 +16,40 @@
                             <tr>
                                 <th class="col">Equipo al que pertenece</th>
                                 <th class="col">Numero de serie de Equipo</th>
-                                <th class="col">amount</th>
-                                <th class="col">Lamina</th>
-                                <th class="col">Diagrama</th>
-                                <th class="col">description</th>
+                                <th class="col">Cantidad</th>
+                                <th class="col">Descripción</th>
+                                <th class="col">Posición</th>
+                                <th class="col"># Parte</th>
+                                <th class="col"># Refacción</th>
+                                <th class="col">Lamina y/o Diagrama</th>
+                                <th class="col">Item</th>
+                                <th class="col">Plano</th>
+                                <th class="col">Modelo</th>
                                 <th class="col">Observaciones</th>
+                                <th *ngIf="vistaPrincipal" class="col">Equipo</th>
                             </tr>
                         </thead>
                         <tr>
-                            <td colspan="7" class="text-center" [innerHTML]="conData"></td>
+                            <td colspan="12" class="text-center" [innerHTML]="conData"></td>
                         </tr>
                         <tbody *ngIf="whit_data">
                             <tr *ngFor="let sparepart of sparepart_array;">
                                 <td>{{sparepart.equipment_id.name}}</td>
                                 <td>{{sparepart.equipment_id.serial_number}}</td>
                                 <td>{{sparepart.amount}}</td>
-                                <td>{{sparepart.lamina}}</td>
-                                <td>{{sparepart.diagram}}</td>
                                 <td>{{sparepart.description}}</td>
+                                <td>{{sparepart.position}}</td>
+                                <td>{{sparepart.num_part}}</td>
+                                <td>{{sparepart.num_ref}}</td>
+                                <td>{{sparepart.sheet_diagram}}</td>
+                                <td>{{sparepart.item}}</td>
+                                <td>{{sparepart.plano}}</td>
+                                <td>{{sparepart.model}}</td>
                                 <td>{{sparepart.observations}}</td>
+                                <td *ngIf="vistaPrincipal">{{sparepart.equipment_id.name}}</td>
                                 <td *ngIf="superUsuario || userAdministrador">
-                                    <button class="btn btn-warning" (click)="updateSparePart(sparepart)">Editar</button>
-                                    <button class="btn btn-danger" (click)="deleteSparePart(sparepart)">Borrar</button>
+                                    <button class="btn btn-azul" (click)="updateSparePart(sparepart)">Editar</button>
+                                    <button class="btn btn-oro" (click)="deleteSparePart(sparepart)">Borrar</button>
                                 </td>
                             </tr>
                         </tbody>

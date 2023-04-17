@@ -34,8 +34,6 @@ export class RegistarRefaccionComponent implements OnInit {
     } else {
       this.serial_number = this.route.snapshot.queryParams['serial_number'];
       this.equipment_id = this.route.snapshot.queryParams['equipment_id'];
-      console.log(this.serial_number);
-      console.log(this.equipment_id);
     }
   }
 
@@ -47,13 +45,12 @@ export class RegistarRefaccionComponent implements OnInit {
     const position = form.value.position;
     const num_part = form.value.num_part;
     const num_ref = form.value.num_ref;
-    const lamina = form.value.lamina;
+    const sheet_diagram = form.value.sheet_diagram;
     const item = form.value.item;
-    const diagram = form.value.diagram;
     const plano = form.value.plano;
     const model = form.value.model;
     const observations = form.value.observations;
-    this.sparepartService.add_sparepart(serial_number, equipment_id, amount, description, position, num_part, num_ref, lamina, item, diagram, plano,model,observations);
+    this.sparepartService.add_sparepart(serial_number, equipment_id, amount, description, position, num_part, num_ref, sheet_diagram, item, plano,model,observations);
   }
 
 

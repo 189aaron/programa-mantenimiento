@@ -18,6 +18,7 @@ export class ConsultaRefaccionComponent implements OnInit {
   whit_data: boolean = false;
   sparepart_array: any[] = [];
   serial_number = '';
+  vistaPrincipal: boolean = false;
 
   constructor(
     private router: Router,
@@ -44,17 +45,35 @@ export class ConsultaRefaccionComponent implements OnInit {
   }
 
   async get_sparepart(serial_number: string) {
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('id_token')
-      }),
-      params: {
-        'serial_number': serial_number,
-      }
-    };
+    console.log(this.serial_number);
+    let httpOptions: any;
 
-    this.http.get(this.path + 'spare_parts_list/', httpOptions).subscribe({
+    if (this.serial_number == null || this.serial_number == undefined) {
+      this.path = this.path + 'spare_parts/'
+      httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('id_token')
+        })
+      };
+      this.vistaPrincipal = true;//para pintar columna del navio al que pertenece
+    } else {
+      this.path = this.path + 'spare_parts_list/'
+      httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('id_token')
+        }),
+        params: {
+          'serial_number': serial_number,
+        }
+      };
+    }
+
+    console.log(this.path);
+    console.log(httpOptions);
+
+    this.http.get(this.path, httpOptions).subscribe({
       next: (response: any) => {
         this.get_list_sparepart(response);
       },
@@ -79,10 +98,7 @@ export class ConsultaRefaccionComponent implements OnInit {
       //no trae data
       this.conData =
         `<h3 class="text-center pt-3">
-          Aun no tenemos datos que mostrarte<br>
-          ¿Deseas registrar una refacción?<br>
-           Haz click en el siguiente enlace<br>
-           <a href="#/equipos/consultar">Registrar refacción</a>
+          Aun no tenemos datos que mostrarte
         </h3>`;
       this.whit_data = false;
     }

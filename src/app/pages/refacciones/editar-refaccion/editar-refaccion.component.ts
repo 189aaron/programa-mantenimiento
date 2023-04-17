@@ -49,7 +49,6 @@ export class EditarRefaccionComponent implements OnInit {
   }
 
   async update_sparepart(form: NgForm) {
-    console.log(form.value)
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
