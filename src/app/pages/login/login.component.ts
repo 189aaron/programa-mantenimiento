@@ -52,14 +52,13 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-
+    
     const email = this.loginForm.controls['email'].value;
     const password = this.loginForm.controls['password'].value;
 
     if(email != null && password != null){
       this.loginService.login(email, password);
     }
-    
    
   }
 

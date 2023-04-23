@@ -15,18 +15,18 @@
                         <thead>
                             <tr>
                                 <th class="col">Equipo al que pertenece</th>
-                                <th class="col">Numero de serie de Equipo</th>
+                                <th class="col">Número de serie de Equipo</th>
                                 <th class="col">Cantidad</th>
                                 <th class="col">Descripción</th>
                                 <th class="col">Posición</th>
-                                <th class="col"># Parte</th>
-                                <th class="col"># Refacción</th>
+                                <th class="col">Número parte</th>
+                                <th class="col">Número refacción</th>
                                 <th class="col">Lamina y/o Diagrama</th>
                                 <th class="col">Item</th>
                                 <th class="col">Plano</th>
                                 <th class="col">Modelo</th>
                                 <th class="col">Observaciones</th>
-                                <th *ngIf="vistaPrincipal" class="col">Equipo</th>
+                                <th *ngIf="superUsuario  || ambosBuques" class="col">Buque Oceanográfico</th>
                             </tr>
                         </thead>
                         <tr>
@@ -46,6 +46,7 @@
                                 <td>{{sparepart.plano}}</td>
                                 <td>{{sparepart.model}}</td>
                                 <td>{{sparepart.observations}}</td>
+                                <td *ngIf="superUsuario || ambosBuques">{{sparepart.equipment_id.ship}}</td>
                                 <td *ngIf="vistaPrincipal">{{sparepart.equipment_id.name}}</td>
                                 <td *ngIf="superUsuario || userAdministrador">
                                     <button class="btn btn-azul" (click)="updateSparePart(sparepart)">Editar</button>

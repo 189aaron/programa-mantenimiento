@@ -1,0 +1,87 @@
+<app-header></app-header>
+<section class="py-5">
+  <div class="container-fluid justify-content-center py-5">
+    <h3 class="ms-5 pt-3">CONTADOR DE HORAS DEL EQUIPO</h3>
+    <div class="row">
+      <div class="col-10"></div>
+      <div class="col-2">
+        <h3>Mes: {{mes}}</h3>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th class="col">Nombre del equipo</th>
+                <th class="col">Lectura anterior</th>
+                <th class="col">Lectura actual</th>
+                <th class="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let equipo of equipmentData;">
+                <td>{{equipo.description}}</td>
+                <td>{{equipo.previousData}}</td>
+                <td>{{equipo.currentData}}</td>
+                <td>
+                  <button type="button" class="btn btn-azul btn-sm" (click)="getEquipment(equipo, $event)"
+                    data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Registrar Horas
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Registrar Horas</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form novalidate="" class="form-group p-2" #formHoras="ngForm" (ngSubmit)="addHours(formHoras, $event)" autocomplete="off">
+          <div class="form-group">
+            <label for="nombreEquipo">Nombre del equipo</label>
+            <input type="text" id="nombreEquipo" name="descriptionO" placeholder="" class="form-control"
+              [(ngModel)]="descriptionO" disabled>
+          </div>
+          <div class="form-group">
+            <label for="lecturaAnterior">Lectura anterior</label>
+            <input type="number" id="lecturaAnterior" name="previousDataO" placeholder="" class="form-control"
+              [(ngModel)]="previousDataO" disabled>
+          </div>
+          <div class="form-group">
+            <label for="lecturaActual">Lectura actual</label>
+            <input type="number" id="lecturaActual" name="currentDataO" placeholder="" class="form-control"
+              [(ngModel)]="currentDataO" disabled>
+          </div>
+          <div class="form-group">
+            <label for="anadirHoras">Añadir horas</label>
+            <input type="number" name="anadirHoras" placeholder="" value="0" class="form-control" ngModel required>
+          </div>
+          <div class="py-3" [innerHTML]="erorHoras"></div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-lg">Registrar Horas</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

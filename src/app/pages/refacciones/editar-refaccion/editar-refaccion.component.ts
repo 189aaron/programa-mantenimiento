@@ -59,6 +59,14 @@ export class EditarRefaccionComponent implements OnInit {
       }
     };
 
+    //yoeli Hacks
+    if (form.value.num_ref == '' || form.value.num_ref == null){
+      form.value.num_ref = 0;
+    }
+    if (form.value.item == '' || form.value.item == null){
+      form.value.item = 0;
+    }
+
     const body = {
       'serial_number': this.serial_number,
       'amount': form.value.amount,

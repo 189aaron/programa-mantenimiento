@@ -9,7 +9,7 @@
                 <div class="card text-center bg-light mb-3">
                     <div class="card-header">Inicia Sesión</div>
                     <div class="card-body">
-                        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="off">
                             <div class="form-group mb-3">
                                 <input type="email" name="email" placeholder="Correo electrónico" class="form-control" formControlName="email">
                                 <div *ngIf="loginForm.get('email')?.invalid  && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" class="text-danger">

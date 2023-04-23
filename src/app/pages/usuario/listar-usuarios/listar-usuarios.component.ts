@@ -9,8 +9,7 @@ import { AuthServiceService } from 'src/app/services/auth-service.service';
 })
 export class ListarUsuariosComponent implements OnInit {
 
-  path = 'http://127.0.0.1:8000/';
-  adminUser: boolean = false;//Solo para administradores
+  path = 'https://copo-unam.herokuapp.com/';
 
   conData: string = '';
   whit_data: boolean = false;
@@ -27,6 +26,7 @@ export class ListarUsuariosComponent implements OnInit {
       this.router.navigate(['/login']);
     }else{
       this.get_users();
+
     }
 
   }
@@ -69,11 +69,12 @@ export class ListarUsuariosComponent implements OnInit {
       //no trae data
       this.conData = 
       `<h3 class="text-center py-3">
-        Aun no hay usuarios registrados<br>
+        Aun no hay usuarios registrados <br>
         ¿Deseas registrar un nuevo usuario?<br>
-        Haz click en el siguiente enlace<br>
-        <a href="#/register">Registrar Usuario</a>
+       Haz click en el siguiente enlace<br>
+       <a href="#/register">Registrar Usuario</a>
        </h3>
+       
        `;
       this.whit_data = false;
     }

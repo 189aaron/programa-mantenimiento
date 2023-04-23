@@ -6,15 +6,15 @@
                 <div class="card bg-light mb-3">
                     <div class="card-header text-center">Registrar Refacción</div>
                     <div class="card-body">
-                        <form novalidate class="form-group p-2" #formRegisterSparePart="ngForm"
-                            (ngSubmit)="add_sparepart(formRegisterSparePart)">
+                        <form novalidate class="form-group" #formRegisterSparePart="ngForm"
+                            (ngSubmit)="add_sparepart(formRegisterSparePart)" autocomplete="off">
                             
                             <div class="form-group mb-3">
-                                <label for="amountLabel" class="form-label">Cantidad</label>
+                                <label for="amountLabel" class="form-label">Cantidad *</label>
                                 <input type="number" name="amount" placeholder="" class="form-control" ngModel>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="descriptionLabel" class="form-label">Descripción</label>
+                                <label for="descriptionLabel" class="form-label">Descripción *</label>
                                 <input type="text" name="description" placeholder="" class="form-control" ngModel>
                             </div>
                             <div class="form-group mb-3">
@@ -53,6 +53,7 @@
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-primary btn-lg">Registrar Refacción</button>
                             </div>
+                            <p class="text-end pt-3"> <small>* Estos campos son obligatorios</small></p>
                         </form>
                     </div>
                 </div>

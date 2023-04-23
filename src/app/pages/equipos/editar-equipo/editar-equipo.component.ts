@@ -21,7 +21,8 @@ export class EditarEquipoComponent implements OnInit {
   model = '';
   type = '';
   power = '';
-  calibration_date = '';
+  calibration_date = '';// el valor que leo/recibo
+  calibration_date_send = '';// el valor que envio
   calibration_date_date = '';
   calibration_date_time = '';
   observations = '';
@@ -47,7 +48,7 @@ export class EditarEquipoComponent implements OnInit {
     this.power = this.route.snapshot.queryParams['power'];
     this.calibration_date = this.route.snapshot.queryParams['calibration_date'];
     this.observations = this.route.snapshot.queryParams['observations'];
-
+    
     //Extraigo los valores de fecha y hora para setear en los input
     let cadena = this.calibration_date;
     let partes = cadena.split(" ");
@@ -72,6 +73,14 @@ export class EditarEquipoComponent implements OnInit {
       }
     };
 
+    console.log(form.value.calibration_date_date )
+    console.log(form.value.calibration_date_time )
+    if (form.value.calibration_date_date == null || form.value.calibration_date_time == undefined || form.value.calibration_date_date == '' || form.value.calibration_date_time == ''){
+      this.calibration_date_send = '1900-01-01T00:00'; //para no enviar vacio al backend
+    }else{
+      this.calibration_date_send = form.value.calibration_date_date + 'T' + form.value.calibration_date_time;
+    }
+
     const body = {
       'group_no': form.value.group_no,
       'name': form.value.name,
@@ -84,14 +93,14 @@ export class EditarEquipoComponent implements OnInit {
       'type': form.value.type,
       'power': form.value.power,
       'serial_number': form.value.serial_number,
-      'calibration_date': form.value.calibration_date_date + 'T' + form.value.calibration_date_time,
+      'calibration_date': this.calibration_date_send,
       'observations': form.value.observations
     };
 
     this.http.put(this.loginService.path + 'configure_equipments/?serial_number=' + this.serial_number, body, httpOptions).subscribe({
       next: (response: any) => {
         //TODO: regresar al inicio
-        alert('Equipo actulizado con exito');
+        alert('Equipo actualizado con éxito');
         this.router.navigate(['/home']);
       },
       error: (error: any) => {

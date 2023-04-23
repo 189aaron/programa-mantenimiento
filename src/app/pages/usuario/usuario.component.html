@@ -7,7 +7,7 @@
                     <div class="card-header text-center">Registrar Usuario</div>
                     <div class="card-body">
                         <form novalidate="" class="form-group p-2" #formRegister="ngForm"
-                            (ngSubmit)="registerUser(formRegister)">
+                            (ngSubmit)="registerUser(formRegister)" autocomplete="off">
                             <div class="form-group mb-3">
                                 <label for="nameLabel" class="form-label">Nombre</label>
                                 <input type="text" name="name" placeholder="" class="form-control" ngModel>

@@ -6,7 +6,7 @@
                 <div class="card text-center bg-light mb-3">
                     <div class="card-header">Ingresa el correo del usuario</div>
                     <div class="card-body">
-                        <form novalidate="" class="form-group p-2" #formLogin="ngForm" (ngSubmit)="delete_users(formLogin)">
+                        <form novalidate="" class="form-group p-2" #formLogin="ngForm" (ngSubmit)="delete_users(formLogin)" autocomplete="off">
                             <div class="form-group mb-3">
                                 <input type="email" name="email" placeholder="Correo electrónico" class="form-control" ngModel>
                             </div>

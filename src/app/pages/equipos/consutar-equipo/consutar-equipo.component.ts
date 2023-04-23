@@ -10,9 +10,10 @@ import { AuthServiceService } from 'src/app/services/auth-service.service';
 })
 export class ConsutarEquipoComponent implements OnInit {
   //TODO agregar el campo Navio al que pertenece en la vista para el SU
-  path = 'http://127.0.0.1:8000/';
+  path = 'https://copo-unam.herokuapp.com/';
   userAdministrador: boolean = false;//Solo para administradores
   superUsuario: boolean = false;//exclusivo superUsuario, no admins
+  ambosBuques: boolean = false;//exclusivo los que ven ambos buques
 
   conData: string = '';
   whit_data: boolean = false;
@@ -37,6 +38,10 @@ export class ConsutarEquipoComponent implements OnInit {
       this.get_equipment();
     }
 
+    let ambosBuquesAux = localStorage.getItem('ship');
+    if (ambosBuquesAux == 'AMBOS'){
+      this.ambosBuques = true;
+    }
   }
 
   async get_equipment() {
@@ -73,13 +78,12 @@ export class ConsutarEquipoComponent implements OnInit {
       this.equipment_array = data;
     } else {
       //no trae data
+      console.log(this.userAdministrador)
       this.conData =
         `<h3 class="text-center py-3">
-          Aun no tenemos datos que mostrarte <br>
-          ¿Deseas registrar un equipo? <br> 
-          Haz click en el siguiente enlace<br>
-          <a href="#/equipos/registrar">Registrar un equipo</a>
-        </h3>`;
+          Aun no tenemos datos que mostrarte
+        </h3>
+        `;
       this.whit_data = false;
     }
   }
@@ -126,7 +130,7 @@ export class ConsutarEquipoComponent implements OnInit {
     this.http.delete(this.loginService.path + 'configure_equipments/', httpOptions).subscribe({
       next: () => {
         //implementar exito
-        alert('Equipo borrado con Exito\n Volverá a la pantalla inicial');
+        alert('Equipo borrado con éxito\n Volverá a la pantalla inicial');
         this.router.navigate(['/home']);
       },
       error: (error: any) => {

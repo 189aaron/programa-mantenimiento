@@ -7,7 +7,7 @@
                     <div class="card-header text-center">Editar Equipo</div>
                     <div class="card-body">
                         <form novalidate class="form-group p-2" #formRegisterEquipment="ngForm"
-                        (ngSubmit)="updateEquipment(formRegisterEquipment)">
+                        (ngSubmit)="updateEquipment(formRegisterEquipment)" autocomplete="off">
                         <div class="form-group mb-3">
                             <label for="unamNumberLabel" class="form-label">Número de inventario</label>
                             <input type="text" name="group_no" placeholder="" class="form-control" [(ngModel)]="group_no">

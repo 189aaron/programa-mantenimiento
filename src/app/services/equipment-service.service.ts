@@ -8,7 +8,7 @@ import { AuthServiceService } from './auth-service.service';
 })
 export class EquipmentServiceService {
 
-  path = 'http://127.0.0.1:8000/';
+  path = 'https://copo-unam.herokuapp.com/';
 
   constructor(
     private router: Router,

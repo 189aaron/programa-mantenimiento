@@ -1,7 +1,7 @@
 <app-header></app-header>
 <section class="py-5">
     <div class="container-fluid justify-content-center py-5">
-        <h3 class="ms-5 pt-3">Consulta de Equipos MS-1</h3>
+        <h3 class="ms-5 pt-3">Consulta de Equipos</h3>
         <div class="row">
             <div class="col"></div>
             <div class="col">
@@ -14,7 +14,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th class="col">Número de inventario</th>
+                                <th class="col">Número de grupo</th>
                                 <th class="col">Nombre del equipo</th>
                                 <th class="col">Localización del equipo</th>
                                 <th class="col">Ubicación el equipo</th>
@@ -25,11 +25,11 @@
                                 <th class="col">Potencia</th>
                                 <th class="col">Fecha de calibración</th>
                                 <th class="col">Observaciones</th>
-                                <th *ngIf="superUsuario" class="col">Buque Oceanografico</th>
+                                <th *ngIf="superUsuario  || ambosBuques" class="col">Buque Oceanografico</th>
                             </tr>
                         </thead>
                         <tr>
-                            <td colspan="11" class="text-center" [innerHTML]="conData"></td>
+                            <td colspan="12" class="text-center" [innerHTML]="conData"></td>
                         </tr>
                         <tbody *ngIf="whit_data">
                             <tr *ngFor="let equipo of equipment_array;">
@@ -44,9 +44,9 @@
                                 <td>{{equipo.power}}</td>
                                 <td>{{equipo.calibration_date}}</td>
                                 <td>{{equipo.observations}}</td>
-                                <td *ngIf="superUsuario">{{equipo.ship}}</td>
+                                <td *ngIf="superUsuario || ambosBuques">{{equipo.ship}}</td>
                                 <td *ngIf="superUsuario == false && userAdministrador == false">
-                                    <button class="btn btn-primary" (click)="getSparePart(equipo)">Consultar Refacciones</button>
+                                    <button class="btn btn-azul" (click)="getSparePart(equipo)">Consultar Refacciones</button>
                                 </td>
                                 <td *ngIf="superUsuario || userAdministrador">
                                     <!--TODO cambiar por los colores en el style intercalando el azul y oro-->

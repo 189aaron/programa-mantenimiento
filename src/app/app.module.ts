@@ -24,6 +24,8 @@ import { ConsultaRefaccionComponent } from './pages/refacciones/consulta-refacci
 import { EditarRefaccionComponent } from './pages/refacciones/editar-refaccion/editar-refaccion.component';
 import { RegistarRefaccionComponent } from './pages/refacciones/registar-refaccion/registar-refaccion.component';
 import { ContraseniaComponent } from './pages/contrasenia/contrasenia.component';
+import { ProgramaMantenimientoComponent } from './pages/programa-mantenimiento/programa-mantenimiento.component';
+import { ControlHorasComponent } from './pages/control-horas/control-horas.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { ContraseniaComponent } from './pages/contrasenia/contrasenia.component'
     ConsultaRefaccionComponent,
     EditarRefaccionComponent,
     RegistarRefaccionComponent,
-    ContraseniaComponent
+    ContraseniaComponent,
+    ProgramaMantenimientoComponent,
+    ControlHorasComponent
   ],
   imports: [
     BrowserModule,

@@ -10,7 +10,7 @@ import { SparepartServiceService } from 'src/app/services/sparepart-service.serv
 })
 export class RegistarRefaccionComponent implements OnInit {
 
-  path = 'http://127.0.0.1:8000/';
+  path = 'https://copo-unam.herokuapp.com/';
   userAdministrador: boolean = false;//Solo para administradores
   superUsuario: boolean = false;//exclusivo superUsuario, no admins
 
@@ -44,9 +44,15 @@ export class RegistarRefaccionComponent implements OnInit {
     const description = form.value.description;
     const position = form.value.position;
     const num_part = form.value.num_part;
-    const num_ref = form.value.num_ref;
+    let  num_ref = form.value.num_ref;
+    if (num_ref == ''){
+      num_ref = 0;
+    }
     const sheet_diagram = form.value.sheet_diagram;
-    const item = form.value.item;
+    let item = form.value.item;
+    if (item == ''){
+      item = 0;
+    }
     const plano = form.value.plano;
     const model = form.value.model;
     const observations = form.value.observations;

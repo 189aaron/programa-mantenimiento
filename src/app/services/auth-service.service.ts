@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 })
 export class AuthServiceService {
 
-  path = 'http://127.0.0.1:8000/';
+  path = 'https://copo-unam.herokuapp.com/';
 
   constructor(
     private router: Router,

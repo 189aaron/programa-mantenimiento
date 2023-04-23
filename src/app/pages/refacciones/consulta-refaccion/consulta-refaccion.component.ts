@@ -10,9 +10,10 @@ import { SparepartServiceService } from 'src/app/services/sparepart-service.serv
 })
 export class ConsultaRefaccionComponent implements OnInit {
 
-  path = 'http://127.0.0.1:8000/';
+  path = 'https://copo-unam.herokuapp.com/';
   userAdministrador: boolean = false;//Solo para administradores
   superUsuario: boolean = false;//exclusivo superUsuario, no admins
+  ambosBuques: boolean = false;//exclusivo los que ven ambos buques
 
   conData: string = '';
   whit_data: boolean = false;
@@ -42,6 +43,11 @@ export class ConsultaRefaccionComponent implements OnInit {
     } else if (superAdmin == 'CAPITAN' || superAdmin == 'JEFE DE MAQUINAS') {
       this.userAdministrador = true;
     }
+
+    let ambosBuquesAux = localStorage.getItem('ship');
+    if (ambosBuquesAux == 'AMBOS'){
+      this.ambosBuques = true;
+    }
   }
 
   async get_sparepart(serial_number: string) {
@@ -56,7 +62,6 @@ export class ConsultaRefaccionComponent implements OnInit {
           'Authorization': 'Bearer ' + localStorage.getItem('id_token')
         })
       };
-      this.vistaPrincipal = true;//para pintar columna del navio al que pertenece
     } else {
       this.path = this.path + 'spare_parts_list/'
       httpOptions = {
@@ -140,7 +145,7 @@ export class ConsultaRefaccionComponent implements OnInit {
     this.http.delete(this.loginService.path + 'configure_spareparts/', httpOptions).subscribe({
       next: () => {
         //implementar exito
-        alert('Equipo borrado con Exito\n Volverá a la pantalla inicial');
+        alert('Refacción borrada con éxito\n Volverá a la pantalla inicial');
         this.router.navigate(['/home']);
       },
       error: (error: any) => {
