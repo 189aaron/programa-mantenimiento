@@ -16,9 +16,8 @@ export class EditarRefaccionComponent implements OnInit {
   position = '';
   num_part = '';
   num_ref = '';
-  lamina = '';
+  sheet_diagram = '';
   item = '';
-  diagram = '';
   plano = '';
   model = '';
   observations = '';
@@ -39,9 +38,8 @@ export class EditarRefaccionComponent implements OnInit {
     this.position = this.route.snapshot.queryParams['position'];
     this.num_part = this.route.snapshot.queryParams['num_part'];
     this.num_ref = this.route.snapshot.queryParams['num_ref'];
-    this.lamina = this.route.snapshot.queryParams['lamina'];
+    this.sheet_diagram = this.route.snapshot.queryParams['sheet_diagram'];
     this.item = this.route.snapshot.queryParams['item'];
-    this.diagram = this.route.snapshot.queryParams['diagram'];
     this.plano = this.route.snapshot.queryParams['plano'];
     this.model = this.route.snapshot.queryParams['model'];
     this.observations = this.route.snapshot.queryParams['observations'];
@@ -74,9 +72,8 @@ export class EditarRefaccionComponent implements OnInit {
       'position': form.value.position,
       'num_part': form.value.num_part,
       'num_ref': form.value.num_ref,
-      'lamina': form.value.lamina,
+      'sheet_diagram': form.value.sheet_diagram,
       'item': form.value.item,
-      'diagram': form.value.diagram,
       'plano': form.value.plano,
       'model': form.value.model,
       'observations': form.value.observations

@@ -39,7 +39,6 @@ export class RegistarRefaccionComponent implements OnInit {
 
   add_sparepart(form: NgForm) {
     const serial_number = this.serial_number;
-    const equipment_id = this.equipment_id;
     const amount = form.value.amount;
     const description = form.value.description;
     const position = form.value.position;
@@ -56,6 +55,8 @@ export class RegistarRefaccionComponent implements OnInit {
     const plano = form.value.plano;
     const model = form.value.model;
     const observations = form.value.observations;
+
+    const equipment_id = this.equipment_id;
     this.sparepartService.add_sparepart(serial_number, equipment_id, amount, description, position, num_part, num_ref, sheet_diagram, item, plano,model,observations);
   }
 

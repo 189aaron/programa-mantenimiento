@@ -112,15 +112,13 @@ export class ConsultaRefaccionComponent implements OnInit {
   updateSparePart(sparepart: any) {
     window.location.href =
       '#/refacciones/editar-refaccion?serial_number=' + sparepart.equipment_id.serial_number +
-      '&equipment_id=' + sparepart.equipment_id +
       '&amount=' + sparepart.amount +
       '&description=' + sparepart.description +
       '&position=' + sparepart.position +
       '&num_part=' + sparepart.num_part +
       '&num_ref=' + sparepart.num_ref +
-      '&lamina=' + sparepart.lamina +
       '&item=' + sparepart.item +
-      '&diagram=' + sparepart.diagram +
+      '&sheet_diagram=' + sparepart.sheet_diagram +
       '&plano=' + sparepart.plano +
       '&model=' + sparepart.model +
       '&observations=' + sparepart.observations +
