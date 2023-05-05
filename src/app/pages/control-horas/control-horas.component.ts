@@ -49,6 +49,8 @@ export class ControlHorasComponent implements OnInit {
   modalMoth: any;
 
   monthDate: any;
+  updateEquipoHoras: any;
+  borrarMes = '';
 
   constructor(
     private router: Router,
@@ -127,9 +129,11 @@ export class ControlHorasComponent implements OnInit {
 
   //para registrar horas a un determinado equipo
   async register_hour(form: NgForm) {
+    this.errorHoras = ``;
+
     if (this.intentoButton == 1) {
       this.current = form.value.current;
-      console.log(typeof this.current)
+      //console.log(typeof this.current)
       if (this.current == '' || this.current === null || this.current === undefined) {
         this.errorHoras = `<p class="text-danger">Debes ingresar un valor </p>`;
       } else if (this.current < '0') {
@@ -145,43 +149,27 @@ export class ControlHorasComponent implements OnInit {
             'Authorization': 'Bearer ' + localStorage.getItem('id_token')
           }),
           params: {
-            'equipment_id': this.equipment_id,
-            'id': ''
+            'equipment_id': this.updateEquipoHoras.equipment_id,
+            'id': this.updateEquipoHoras.id
           }
         };
 
-        this.http.put(this.loginService.path + 'hours_counter', httpOptions).subscribe({
+        const body = {
+          "current": this.current
+        }
+
+        this.http.put(this.loginService.path + 'hours_counter/', body, httpOptions).subscribe({
           next: (response: any) => {
-            //TODO: regresar al inicio
-            alert('Horas agregadas con éxito');
+            //console.log('Se agrego la hora correctamente')
+            this.errorHoras = `<p class="text-success">Se agrego la hora correctamente, para ver el cambio recarga la pagina</p>`;
           },
           error: (error: any) => {
-            if (error.error.code == 'token_not_valid') {
-              alert('Caducó la sesión, por favor ingresa de nuevo');
-              this.loginService.logout();
-            } else if (error.status == '400') {
-              alert(error.error.detail);
-            } else if (error.status == '404') {
-              alert('Usuario no encontrado');
-            } else if (error.status == '500') {
-              alert('Error del servidor');
-            }
+            console.log(error)
+            //if (error.status == '400')
           }
         })
 
       }
-
-      //Para registrar el mes antes del registro de horas, asi confirmo que tiene un mes registrado o se va a crear uno nuevo
-      /*const obj = await this.hoursService.registerHours('0', this.month, this.year, this.equipment_id);
-
-      if (obj) {
-        this.modalHours.show();
-        this.modalMoth.hide();
-      } else {
-        alert('ha ocurrido un error, por favor contacta al administrador');
-
-      }*/
-
 
     } else {
       alert('Solo puede agregar el valor 1 vez por intento');
@@ -202,7 +190,7 @@ export class ControlHorasComponent implements OnInit {
 
         this.year = yearAux[0];
 
-        console.log('0', this.month, this.year, this.equipment_id);
+        //console.log('0', this.month, this.year, this.equipment_id);
 
         const httpOptions = {
           headers: new HttpHeaders({
@@ -239,58 +227,6 @@ export class ControlHorasComponent implements OnInit {
             }
           }
         })
-
-        //Para registrar el mes antes del registro de horas, asi confirmo que tiene un mes registrado o se va a crear uno nuevo
-        //const obj = await this.hoursService.registerHours('0', this.month, this.year, this.equipment_id);
-        /** 
-        if (obj) {
-          this.modalHours.show();
-          this.modalMoth.hide();
-        } else {
-          console.log(obj);
-          alert('ha ocurrido un error, por favor contacta al administrador');
-        }
-        const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('id_token'),
-      }),
-      params: {
-        'equipment_id': equipment_id,
-      }
-    }
-
-    const body = {
-      "current": current,
-      "month": month,
-      "year": year
-    };
-
-    return this.http.post(this.path + 'hours_counter/', body, httpOptions).subscribe({
-      next: () => {
-        //alert('Horas registradas');
-      },
-      error: (error: any) => {
-        if (error.error.code == 'token_not_valid') {
-          alert('Caducó la sesión, por favor ingresa de nuevo');
-          this.router.navigate(['/login']);
-        } else if (error.status == '400') {
-          alert('Ya existe el registro de este mes')
-          //this.router.navigate(['/login']);
-        } else if (error.status == '401') {
-          alert(error.error.detail)
-          this.router.navigate(['/login']);
-        } else if (error.status == '404') {
-          alert(error.error.detail)
-          this.router.navigate(['/login']);
-        } else {
-          alert(JSON.stringify(error.error, null, 2));
-        }
-
-      }
-    });
-        
-        */
       }
 
 
@@ -302,15 +238,55 @@ export class ControlHorasComponent implements OnInit {
 
   }
 
+  deleteMonth() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('id_token')
+      }),
+      params: {
+        'equipment_id': this.updateEquipoHoras.equipment_id,
+        'id': this.updateEquipoHoras.id
+      }
+    };
+
+    this.http.delete(this.loginService.path + 'hours_counter/', httpOptions).subscribe({
+      next: () => {
+        this.borrarMes = `<p class="text-success text-center">Mes borrado con exito <br>No te olvides recargar la pagina para ver tus cambios</p>`
+      },
+      error:() => {
+        console.log('error a la hora de borrar');
+
+      }
+    })
+  }
+
   //setear valores al modal
   pasarDatos(equipo: any) {
-    console.log(equipo)
+    //console.log(equipo)
     this.intentoButton = 1; // seteo el valor en 1 para el nuevo intento del boton
     this.equipmentName = '';
     this.equipment_id = '';
     this.errorHoras = '';
     this.errorMes = '';
     this.existeMes = '';
+
+    this.equipmentName = equipo.name;
+    this.equipment_id = equipo.id;
+  }
+
+  //setear valores al modal
+  pasarDatosHoras(equipo: any) {
+    this.updateEquipoHoras = '';//quito cualquier valor
+    this.updateEquipoHoras = equipo; //seteo nuevo valor
+    console.log(this.updateEquipoHoras)
+    this.intentoButton = 1; // seteo el valor en 1 para el nuevo intento del boton
+    this.equipmentName = '';
+    this.equipment_id = '';
+    this.errorHoras = '';
+    this.errorMes = '';
+    this.existeMes = '';
+    this.borrarMes = '';
 
     this.equipmentName = equipo.equipment;
     this.equipment_id = equipo.id;
@@ -355,7 +331,7 @@ export class ControlHorasComponent implements OnInit {
         //this.router.navigate(['/login']);
       },
       error: (error: any) => {
-        console.error(error.error);
+        //console.error(error.error);
         if (error.error.code == 'token_not_valid') {
           alert('Caducó la sesión, por favor ingresa de nuevo');
           this.loginService.logout();

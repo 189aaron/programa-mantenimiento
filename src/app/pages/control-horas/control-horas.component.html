@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row justify-content-between pt-3">
             <div class="col-auto offset-1">
                 <form (ngSubmit)="list_hour(formListHour)" novalidate class="form-group" #formListHour="ngForm"
@@ -55,8 +55,7 @@
 
             </div>
             <div class="col-3">
-                <br>
-                <h4>Mes: {{mesConsulta}}</h4>
+                <h4 class="pt-5">Mes: {{mesConsulta}}</h4>
                 <h4>Año: {{anioConsulta}}</h4>
             </div>
         </div>
@@ -83,8 +82,11 @@
                                 <td>{{equipo.current - equipo.previous}}</td>
                                 <td *ngIf="superUsuario || userAdministrador">
                                     <button class="btn btn-azul btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#modalHours" (click)="pasarDatos(equipo)">Agregar Horas</button>
-                                    <button class="btn btn-oro btn-sm">Eliminar Horas/Mes</button>
+                                        data-bs-target="#modalHours" (click)="pasarDatosHoras(equipo)"> Agregar
+                                        Horas </button>
+                                    <button type="button" class="btn btn-oro" data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal" (click)="pasarDatosHoras(equipo)">Eliminar
+                                        Horas/Mes</button>
                                 </td>
                                 <!--<td *ngIf="superUsuario == false && userAdministrador == false">
                                     <button class="btn btn-azul">Consultar Horas</button>
@@ -134,7 +136,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-oro" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-oro" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
@@ -169,7 +171,29 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-oro" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-oro" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal eliminar Mes-->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteModalLabel">Eliminar Mes</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Está seguro de eliminar el registro del mes?
+                <div class="d-grid pt-3">
+                    <button type="submit" class="btn btn-azul" (click)="deleteMonth()">Eliminar</button>
+                </div>
+                <div class="py-3" [innerHTML]="borrarMes"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-oro" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
