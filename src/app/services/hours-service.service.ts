@@ -44,6 +44,9 @@ export class HoursServiceService {
         } else if (error.status == '401') {
           alert(error.error.detail)
           this.router.navigate(['/login']);
+        } else if (error.status == '404') {
+          alert(error.error.detail)
+          this.router.navigate(['/login']);
         } else {
           alert(JSON.stringify(error.error, null, 2));
         }

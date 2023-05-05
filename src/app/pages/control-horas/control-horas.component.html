@@ -2,7 +2,7 @@
 <section class="py-5">
     <div class="container-fluid justify-content-center py-5">
         <h3 class="ms-5 pt-3">CONTROL DE HORAS</h3>
-        <div class="row pt-3">
+        <div class="row py-3">
             <div class="col">
                 <div class="table-responsive">
                     <table class="table table-striped">
@@ -29,9 +29,9 @@
                                 <td *ngIf="superUsuario || userAdministrador">
                                     <!--TODO cambiar por los colores en el style intercalando el azul y oro-->
                                     <button class="btn btn-azul btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop" (click)="pasarDatos(equipo)">Registrar
+                                        data-bs-target="#modalMonth" (click)="pasarDatos(equipo)">Registrar
                                         Mes</button>
-                                        <button class="btn btn-oro">Programar Mantenimiento</button>
+                                    <!--<button class="btn btn-oro">Programar Mantenimiento</button>-->
                                 </td>
                             </tr>
                         </tbody>
@@ -39,21 +39,23 @@
                 </div>
             </div>
         </div>
+        
         <div class="row justify-content-between pt-3">
             <div class="col-auto offset-1">
                 <form (ngSubmit)="list_hour(formListHour)" novalidate class="form-group" #formListHour="ngForm"
                     autocomplete="off">
                     <div class="form-group mb-3">
-                        <label for="Label" class="form-label"> <span class="h4">Seleciona un Mes</span> </label>
+                        <label for="Label" class="form-label"><span class="h4">Seleciona un Mes</span></label>
                         <input type="month" name="month" placeholder="" class="form-control" ngModel>
                         <div class="d-grid pt-3">
-                            <button type="submit" class="btn btn-primary btn-lg">Buscar</button>
+                            <button type="submit" class="btn btn-oro btn-lg">Buscar</button>
                         </div>
                     </div>
                 </form>
-                
+
             </div>
             <div class="col-3">
+                <br>
                 <h4>Mes: {{mesConsulta}}</h4>
                 <h4>Año: {{anioConsulta}}</h4>
             </div>
@@ -80,8 +82,9 @@
                                 <td>{{equipo.current}}</td>
                                 <td>{{equipo.current - equipo.previous}}</td>
                                 <td *ngIf="superUsuario || userAdministrador">
-                                    <button class="btn btn-azul btn-sm" >Agregar Horas</button>
-                                    <button class="btn btn-oro btn-sm" >Eliminar Horas/Mes</button>
+                                    <button class="btn btn-azul btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#modalHours" (click)="pasarDatos(equipo)">Agregar Horas</button>
+                                    <button class="btn btn-oro btn-sm">Eliminar Horas/Mes</button>
                                 </td>
                                 <!--<td *ngIf="superUsuario == false && userAdministrador == false">
                                     <button class="btn btn-azul">Consultar Horas</button>
@@ -97,18 +100,58 @@
 </section>
 <app-footer></app-footer>
 
-<!-- Modal Registro Mes-->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<!-- Modal Registro Horas-->
+<div class="modal fade" id="modalHours" tabindex="-1" aria-labelledby="modalHoursLabel" aria-hidden="true"
+    data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" >Captura Mes</h1>
+                <h1 class="modal-title fs-5">Captura Hora</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form novalidate class="form-group" #formRegisterHours="ngForm"
                     (ngSubmit)="register_hour(formRegisterHours)" autocomplete="off">
+                    <div class="form-group mb-3">
+                        <label for="Label">Nombre del equipo</label>
+                        <input type="text" name="equipmentName" placeholder="" class="form-control"
+                            [(ngModel)]="equipmentName" disabled>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Label" class="form-label">Mes de registro</label>
+                        <input type="month" name="monthDate" placeholder="" class="form-control" [(ngModel)]="monthDate"
+                            disabled>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Label" class="form-label">Horas a registrar</label>
+                        <input type="number" name="current" placeholder="" class="form-control" ngModel>
+                    </div>
+                    <div class="py-3" [innerHTML]="errorHoras"></div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-azul btn-lg">Registrar Horas</button>
+                    </div><!--
+                    <p class="text-end pt-3"> <small>* Estos campos son obligatorios</small></p>-->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-oro" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Registro Mes-->
+<div class="modal fade" id="modalMonth" tabindex="-1" aria-labelledby="modalMonthLabel" aria-hidden="true"
+    data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Captura Mes</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form novalidate class="form-group" #formRegisterMonth="ngForm"
+                    (ngSubmit)="register_month(formRegisterMonth)" autocomplete="off">
                     <div class="form-group mb-3">
                         <label for="equipmentName">Nombre del equipo</label>
                         <input type="text" id="equipmentName" name="equipmentName" placeholder="" class="form-control"
@@ -118,34 +161,16 @@
                         <label for="Label" class="form-label">Mes de registro</label>
                         <input type="month" name="month" placeholder="" class="form-control" ngModel>
                     </div>
-                    <div class="py-3" [innerHTML]="erorHoras"></div>
+                    <div class="py-3" [innerHTML]="errorMes"></div>
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-primary btn-lg" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Registrar Mes y Continuar</button>
-                    </div>
-                    <p class="text-end pt-3"> <small>* Estos campos son obligatorios</small></p>
+                        <button type="submit" class="btn btn-azul btn-lg">Registrar Mes</button>
+                    </div><!--
+                    <p class="text-end pt-3"> <small>* Estos campos son obligatorios</small></p>-->
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-oro" data-bs-dismiss="modal">Cancelar</button>
             </div>
         </div>
     </div>
 </div>
-
-<!-- Modal Registro Horas-->
-<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Aqui va el agregar horas
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary" >Back to first</button>
-        </div>
-      </div>
-    </div>
-  </div>

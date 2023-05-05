@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Modal } from 'bootstrap';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { HoursServiceService } from 'src/app/services/hours-service.service';
 
@@ -10,7 +11,6 @@ import { HoursServiceService } from 'src/app/services/hours-service.service';
   templateUrl: './control-horas.component.html'
 })
 export class ControlHorasComponent implements OnInit {
-  path = 'https://copo-unam.herokuapp.com/';
 
   userAdministrador: boolean = false;//Solo para administradores
   superUsuario: boolean = false;//exclusivo superUsuario, no admins
@@ -19,7 +19,9 @@ export class ControlHorasComponent implements OnInit {
   //Para los errores de las consultas vacias
   conData: string = '';
   conDataList: string = '';
-  erorHoras: string = '';
+  errorMes: string = '';//Para el modal del mes
+  errorHoras: string = '';//Para el modal del mes
+  existeMes: string = '';//para informar si hay registro de mes
 
   //para listar los equipos que se tienen registrados
   whit_data: boolean = false;
@@ -31,10 +33,22 @@ export class ControlHorasComponent implements OnInit {
 
 
   intentoButton: number = 1;//para los intentos del boton
-  equipment_id: string = '';//para setear en el post
   equipmentName: string = '';//para mostrar nombre del equipo al que pertenece
   mesConsulta: string = '';//Para setear el mes de consulta
   anioConsulta: string = '';//Para setear el mes de consulta
+
+
+  //Para el registro de mes
+  equipment_id: string = '';//para setear en el post
+  current: string = '';
+  month: string = '';
+  year: string = '';
+
+  //para los modal de hora y mes
+  modalHours: any;
+  modalMoth: any;
+
+  monthDate: any;
 
   constructor(
     private router: Router,
@@ -54,6 +68,10 @@ export class ControlHorasComponent implements OnInit {
         this.userAdministrador = true;
       }
       this.get_equipment();//traigo los equipos
+
+      //Seteo los modales para ocupar
+      this.modalHours = new Modal(document.getElementById('modalHours')!);
+      this.modalMoth = new Modal(document.getElementById('modalMonth')!);
     }
 
     let ambosBuquesAux = localStorage.getItem('ship');
@@ -71,7 +89,7 @@ export class ControlHorasComponent implements OnInit {
       })
     };
 
-    this.http.get(this.path + 'equipment/', httpOptions).subscribe({
+    this.http.get(this.loginService.path + 'equipment/', httpOptions).subscribe({
       next: (response: any) => {
         this.get_list_equiptment(response);
       },
@@ -110,23 +128,172 @@ export class ControlHorasComponent implements OnInit {
   //para registrar horas a un determinado equipo
   async register_hour(form: NgForm) {
     if (this.intentoButton == 1) {
-      //TODO: GET para llamar a la funcion
-      const monthDate = form.value.month;
+      this.current = form.value.current;
+      console.log(typeof this.current)
+      if (this.current == '' || this.current === null || this.current === undefined) {
+        this.errorHoras = `<p class="text-danger">Debes ingresar un valor </p>`;
+      } else if (this.current < '0') {
+        this.errorHoras = `<p class="text-danger">El valor no puede ser negativo</p>`;
+      } else if (this.current == '0') {
+        this.errorHoras = `<p class="text-danger">El valor no puede ser cero</p>`;
+      } else if (this.current > '0') {
+        this.errorHoras = ``;
 
-      let month = this.obtenerMes(monthDate);
-      let yearAux = monthDate.split("-");
+        const httpOptions = {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('id_token')
+          }),
+          params: {
+            'equipment_id': this.equipment_id,
+            'id': ''
+          }
+        };
 
-      let year = yearAux[0];
+        this.http.put(this.loginService.path + 'hours_counter', httpOptions).subscribe({
+          next: (response: any) => {
+            //TODO: regresar al inicio
+            alert('Horas agregadas con éxito');
+          },
+          error: (error: any) => {
+            if (error.error.code == 'token_not_valid') {
+              alert('Caducó la sesión, por favor ingresa de nuevo');
+              this.loginService.logout();
+            } else if (error.status == '400') {
+              alert(error.error.detail);
+            } else if (error.status == '404') {
+              alert('Usuario no encontrado');
+            } else if (error.status == '500') {
+              alert('Error del servidor');
+            }
+          }
+        })
 
-      console.log('0', month, year, this.equipment_id);
-      const obj = await this.hoursService.registerHours('0', month, year, this.equipment_id);
+      }
+
+      //Para registrar el mes antes del registro de horas, asi confirmo que tiene un mes registrado o se va a crear uno nuevo
+      /*const obj = await this.hoursService.registerHours('0', this.month, this.year, this.equipment_id);
 
       if (obj) {
-        console.log(obj);
+        this.modalHours.show();
+        this.modalMoth.hide();
       } else {
-        console.log(obj);
         alert('ha ocurrido un error, por favor contacta al administrador');
+
+      }*/
+
+
+    } else {
+      alert('Solo puede agregar el valor 1 vez por intento');
+    }
+  }
+
+  //para registrar horas a un determinado mes de equipo
+  async register_month(form: NgForm) {
+    if (this.intentoButton == 1) {
+
+      this.monthDate = form.value.month;
+      if (this.monthDate == '') {
+        this.errorMes = `<p class="text-danger">Debes ingresar una fecha para el registro</p>`;
+      } else {
+        //proceso porque si viene fecha
+        this.month = this.obtenerMes(this.monthDate);
+        let yearAux = this.monthDate.split("-");
+
+        this.year = yearAux[0];
+
+        console.log('0', this.month, this.year, this.equipment_id);
+
+        const httpOptions = {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('id_token'),
+          }),
+          params: {
+            'equipment_id': this.equipment_id,
+          }
+        }
+
+        const body = {
+          "current": 0,
+          "month": this.month,
+          "year": this.year
+        };
+
+        this.http.post(this.loginService.path + 'hours_counter/', body, httpOptions).subscribe({
+          next: () => {
+            //El mes no se habia registrado
+            //this.modalHours.show();
+            //this.modalMoth.hide();
+            this.errorMes = `<p class="text-success text-end">Mes registrado con exito</p>`;
+          },
+          error: (error: any) => {
+            if (error.status == '400') {
+              if (error.error.non_field_errors == 'Ya existen horas registradas a este equipo con este mes') {
+                //this.modalHours.show();
+                //this.modalMoth.hide();
+                //this.existeMes = `<p class="text-danger">Ya existe el registro de este mes</p>`;
+                this.errorMes = `<p class="text-warning text-end">Ya existen horas registradas a este equipo con este mes</p>`;
+              }
+              //this.router.navigate(['/login']);
+            }
+          }
+        })
+
+        //Para registrar el mes antes del registro de horas, asi confirmo que tiene un mes registrado o se va a crear uno nuevo
+        //const obj = await this.hoursService.registerHours('0', this.month, this.year, this.equipment_id);
+        /** 
+        if (obj) {
+          this.modalHours.show();
+          this.modalMoth.hide();
+        } else {
+          console.log(obj);
+          alert('ha ocurrido un error, por favor contacta al administrador');
+        }
+        const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('id_token'),
+      }),
+      params: {
+        'equipment_id': equipment_id,
       }
+    }
+
+    const body = {
+      "current": current,
+      "month": month,
+      "year": year
+    };
+
+    return this.http.post(this.path + 'hours_counter/', body, httpOptions).subscribe({
+      next: () => {
+        //alert('Horas registradas');
+      },
+      error: (error: any) => {
+        if (error.error.code == 'token_not_valid') {
+          alert('Caducó la sesión, por favor ingresa de nuevo');
+          this.router.navigate(['/login']);
+        } else if (error.status == '400') {
+          alert('Ya existe el registro de este mes')
+          //this.router.navigate(['/login']);
+        } else if (error.status == '401') {
+          alert(error.error.detail)
+          this.router.navigate(['/login']);
+        } else if (error.status == '404') {
+          alert(error.error.detail)
+          this.router.navigate(['/login']);
+        } else {
+          alert(JSON.stringify(error.error, null, 2));
+        }
+
+      }
+    });
+        
+        */
+      }
+
+
 
     } else {
       alert('Solo puede agregar el valor 1 vez por intento');
@@ -137,25 +304,29 @@ export class ControlHorasComponent implements OnInit {
 
   //setear valores al modal
   pasarDatos(equipo: any) {
+    console.log(equipo)
     this.intentoButton = 1; // seteo el valor en 1 para el nuevo intento del boton
     this.equipmentName = '';
     this.equipment_id = '';
+    this.errorHoras = '';
+    this.errorMes = '';
+    this.existeMes = '';
 
-    this.equipmentName = equipo.name;
+    this.equipmentName = equipo.equipment;
     this.equipment_id = equipo.id;
   }
 
   //Para detonar la consulta por mes
   list_hour(form: NgForm) {
-    const monthDate = form.value.month;
+    this.monthDate = form.value.month;
 
-    if (monthDate == '') {
+    if (this.monthDate == '') {
       //No colocaron mes y año
       alert('Introduce un Mes y Año');
     } else {
       //Si traigo datos
-      this.mesConsulta = this.obtenerMes(monthDate);
-      let yearAux = monthDate.split("-");
+      this.mesConsulta = this.obtenerMes(this.monthDate);
+      let yearAux = this.monthDate.split("-");
 
       this.anioConsulta = yearAux[0];
 
@@ -177,7 +348,7 @@ export class ControlHorasComponent implements OnInit {
       }
     };
 
-    return this.http.get(this.path + 'hours_counter/', httpOptions).subscribe({
+    return this.http.get(this.loginService.path + 'hours_counter/', httpOptions).subscribe({
       next: (response: any) => {
         this.conDataList = '';
         this.get_list_hours(response);
@@ -199,8 +370,6 @@ export class ControlHorasComponent implements OnInit {
           alert(error.error);
           this.router.navigate(['/login']);
         }
-
-
       }
     });
 
@@ -257,4 +426,8 @@ export class ControlHorasComponent implements OnInit {
     return mesString;
   }
 
+  closeModalHours() {
+    this.modalHours.hide();
+    this.modalMoth.hide();
+  }
 }
