@@ -1,87 +1,151 @@
 <app-header></app-header>
 <section class="py-5">
-  <div class="container-fluid justify-content-center py-5">
-    <h3 class="ms-5 pt-3">CONTADOR DE HORAS DEL EQUIPO</h3>
-    <div class="row">
-      <div class="col-10"></div>
-      <div class="col-2">
-        <h3>Mes: {{mes}}</h3>
-      </div>
-    </div>
-    <div class="row pt-3">
-      <div class="col">
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th class="col">Nombre del equipo</th>
-                <th class="col">Lectura anterior</th>
-                <th class="col">Lectura actual</th>
-                <th class="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let equipo of equipmentData;">
-                <td>{{equipo.description}}</td>
-                <td>{{equipo.previousData}}</td>
-                <td>{{equipo.currentData}}</td>
-                <td>
-                  <button type="button" class="btn btn-azul btn-sm" (click)="getEquipment(equipo, $event)"
-                    data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    Registrar Horas
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    <div class="container-fluid justify-content-center py-5">
+        <h3 class="ms-5 pt-3">CONTROL DE HORAS</h3>
+        <div class="row pt-3">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="col text-end">Número de grupo</th>
+                                <th class="col">Nombre del equipo</th>
+                                <th class="col text-center">Horas Actuales</th>
+                                <th *ngIf="superUsuario  || ambosBuques" class="col">Buque Oceanografico</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td colspan="12" class="text-center" [innerHTML]="conData"></td>
+                        </tr>
+                        <tbody *ngIf="whit_data">
+                            <tr *ngFor="let equipo of equipment_array;">
+                                <td class="text-end">{{equipo.group_no}}</td>
+                                <td>{{equipo.name}}</td>
+                                <td>{{equipo.hours}}</td>
+                                <td *ngIf="superUsuario || ambosBuques">{{equipo.ship}}</td>
+                                <td *ngIf="superUsuario == false && userAdministrador == false">
+                                    <button class="btn btn-azul">Consultar Horas</button>
+                                </td>
+                                <td *ngIf="superUsuario || userAdministrador">
+                                    <!--TODO cambiar por los colores en el style intercalando el azul y oro-->
+                                    <button class="btn btn-azul btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#staticBackdrop" (click)="pasarDatos(equipo)">Registrar
+                                        Mes</button>
+                                        <button class="btn btn-oro">Programar Mantenimiento</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
-
+        <div class="row justify-content-between pt-3">
+            <div class="col-auto offset-1">
+                <form (ngSubmit)="list_hour(formListHour)" novalidate class="form-group" #formListHour="ngForm"
+                    autocomplete="off">
+                    <div class="form-group mb-3">
+                        <label for="Label" class="form-label"> <span class="h4">Seleciona un Mes</span> </label>
+                        <input type="month" name="month" placeholder="" class="form-control" ngModel>
+                        <div class="d-grid pt-3">
+                            <button type="submit" class="btn btn-primary btn-lg">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+                
+            </div>
+            <div class="col-3">
+                <h4>Mes: {{mesConsulta}}</h4>
+                <h4>Año: {{anioConsulta}}</h4>
+            </div>
+        </div>
+        <div class="row pt-3">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="col">Nombre del equipo</th>
+                                <th class="col">Lectura anterior</th>
+                                <th class="col">Lectura actual</th>
+                                <th class="col">Horas agregadas en el mes</th><!--TODO hacer resta de string-->
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td colspan="12" class="text-center" [innerHTML]="conDataList"></td>
+                        </tr>
+                        <tbody *ngIf="whit_data">
+                            <tr *ngFor="let equipo of hours_array;">
+                                <td>{{equipo.equipment}}</td>
+                                <td>{{equipo.previous}}</td>
+                                <td>{{equipo.current}}</td>
+                                <td>{{equipo.current - equipo.previous}}</td>
+                                <td *ngIf="superUsuario || userAdministrador">
+                                    <button class="btn btn-azul btn-sm" >Agregar Horas</button>
+                                    <button class="btn btn-oro btn-sm" >Eliminar Horas/Mes</button>
+                                </td>
+                                <!--<td *ngIf="superUsuario == false && userAdministrador == false">
+                                    <button class="btn btn-azul">Consultar Horas</button>
+                                </td>
+                                -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 <app-footer></app-footer>
 
-
-<!-- Modal -->
+<!-- Modal Registro Mes-->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Registrar Horas</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form novalidate="" class="form-group p-2" #formHoras="ngForm" (ngSubmit)="addHours(formHoras, $event)" autocomplete="off">
-          <div class="form-group">
-            <label for="nombreEquipo">Nombre del equipo</label>
-            <input type="text" id="nombreEquipo" name="descriptionO" placeholder="" class="form-control"
-              [(ngModel)]="descriptionO" disabled>
-          </div>
-          <div class="form-group">
-            <label for="lecturaAnterior">Lectura anterior</label>
-            <input type="number" id="lecturaAnterior" name="previousDataO" placeholder="" class="form-control"
-              [(ngModel)]="previousDataO" disabled>
-          </div>
-          <div class="form-group">
-            <label for="lecturaActual">Lectura actual</label>
-            <input type="number" id="lecturaActual" name="currentDataO" placeholder="" class="form-control"
-              [(ngModel)]="currentDataO" disabled>
-          </div>
-          <div class="form-group">
-            <label for="anadirHoras">Añadir horas</label>
-            <input type="number" name="anadirHoras" placeholder="" value="0" class="form-control" ngModel required>
-          </div>
-          <div class="py-3" [innerHTML]="erorHoras"></div>
-          <div class="d-grid">
-            <button type="submit" class="btn btn-primary btn-lg">Registrar Horas</button>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" >Captura Mes</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form novalidate class="form-group" #formRegisterHours="ngForm"
+                    (ngSubmit)="register_hour(formRegisterHours)" autocomplete="off">
+                    <div class="form-group mb-3">
+                        <label for="equipmentName">Nombre del equipo</label>
+                        <input type="text" id="equipmentName" name="equipmentName" placeholder="" class="form-control"
+                            [(ngModel)]="equipmentName" disabled>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Label" class="form-label">Mes de registro</label>
+                        <input type="month" name="month" placeholder="" class="form-control" ngModel>
+                    </div>
+                    <div class="py-3" [innerHTML]="erorHoras"></div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Registrar Mes y Continuar</button>
+                    </div>
+                    <p class="text-end pt-3"> <small>* Estos campos son obligatorios</small></p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Registro Horas-->
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Aqui va el agregar horas
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" >Back to first</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
