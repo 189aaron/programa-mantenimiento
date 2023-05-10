@@ -15,15 +15,17 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     let session = localStorage.getItem('id_token');
-    if(session == null || session == undefined){
+    if (session == null || session == undefined) {
       this.router.navigate(['/login']);
+    } else {
+      let superAdmin = localStorage.getItem('position');
+      if (superAdmin == 'SUPERUSUARIO') {
+        this.superUsuario = true;
+      } else if (superAdmin == 'CAPITAN' || superAdmin == 'JEFE DE MAQUINAS') {
+        this.userAdministrador = true;
+      }
     }
-    let superAdmin = localStorage.getItem('position');
-    if( superAdmin == 'SUPERUSUARIO'){
-      this.superUsuario = true;
-    }else if( superAdmin == 'CAPITAN' || superAdmin == 'JEFE DE MAQUINAS'){
-      this.userAdministrador = true;
-    }
+
   }
 
 }

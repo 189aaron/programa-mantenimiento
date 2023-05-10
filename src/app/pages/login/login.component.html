@@ -1,41 +1,30 @@
-<app-header></app-header>
-<br><br>
-<br><br>
-<main class=" py-md-0">
+<main class="py-md-0">
     <div class="container-fluid justify-content-center pb-5">
         <div class="row">
             <div class="col-sm-8 col-md-6 col-lg-6 col-xl-4 mx-auto pt-3 pt-md-0">
-                <h2 class="py-3 text-center">Bienvenido</h2>
-                <div class="card text-center bg-light mb-3">
-                    <div class="card-header">Inicia Sesión</div>
+                <h2 class="py-3 fx-bold text-center">Bienvenido</h2>
+                <div class="card bg-light mb-3">
+                    <div class="card-header fw-bold text-center">Inicia Sesión</div>
                     <div class="card-body">
-                        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="off">
-                            <div class="form-group mb-3">
-                                <input type="email" name="email" placeholder="Correo electrónico" class="form-control" formControlName="email">
-                                <div *ngIf="loginForm.get('email')?.invalid  && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" class="text-danger">
-                                    <div *ngIf="loginForm.get('email')!.errors!['required']">
-                                        Correo es requerido.
-                                    </div>
-                                    <div *ngIf="loginForm.get('email')!.errors!['email']">
-                                        El correo electrónico debe ser una dirección de correo electrónico válida.
-                                    </div>
-                                </div>
+                        <form #loginForm class="row g-3 needs-validation" name="loginForm" novalidate (submit)="onLogin(loginForm, $event)">
+                        <div class="form-floating">
+                            <input type="email" class="form-control" id="loginEmail" placeholder="Ingresa tu correo" required>
+                            <label for="loginEmail">Correo electrónico</label>
+                            <div class="invalid-feedback text-end">
+                                Correo es requerido
                             </div>
-                            <div class="form-group mb-3">
-                                <input type="password" name="password" placeholder="Contraseña" class="form-control" formControlName="password">
-                                <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="text-danger">
-                                    <div *ngIf="loginForm.get('password')!.errors!['required']">
-                                        Contraseña es requerida.
-                                    </div>
-                                    <!--<div *ngIf="form['password']!.errors!['minlength']">
-                                        Password must be at least 6 characters long.
-                                    </div>-->
-                                </div>
+                        </div>
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="loginPass" placeholder="Ingresa tu contraseña" required>
+                            <label for="loginPass">Contraseña</label>
+                            <div class="invalid-feedback">
+                                Contraseña es requerido
                             </div>
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-primary btn-lg">Iniciar sesión</button>
-                            </div>
-                        </form>
+                        </div>
+                        <div class="d-grid my-3">
+                            <button class="btn btn-primary btn-lg" type="submit">Iniciar sesión</button>
+                        </div>
+                    </form>
                     </div>
                 </div>
             </div>

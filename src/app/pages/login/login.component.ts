@@ -52,14 +52,30 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    
+
     const email = this.loginForm.controls['email'].value;
     const password = this.loginForm.controls['password'].value;
 
-    if(email != null && password != null){
+    if (email != null && password != null) {
       this.loginService.login(email, password);
     }
-   
+
+  }
+
+  onLogin(form: HTMLFormElement, event: Event) {
+    if (form.checkValidity()) {
+      // Si el formulario es válido
+      event.preventDefault(); // Evita la recarga de la página
+      event.stopPropagation(); // Evita la propagación del evento
+
+      //this.router.navigateByUrl('home');
+
+    } else {
+      // Si el formulario no es válido
+      event.preventDefault(); // Evita la recarga de la página
+      event.stopPropagation(); // Evita la propagación del evento
+    }
+    form.classList.add('was-validated');
   }
 
 }

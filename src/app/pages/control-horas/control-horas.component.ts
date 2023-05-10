@@ -102,7 +102,7 @@ export class ControlHorasComponent implements OnInit {
         } else if (error.status == '400') {
           alert(error.error.detail);
         } else {
-          //          TODO ver el error 404 not found
+          //TODO ver el error 404 not found
           alert(error.error.detail);
         }
       }
@@ -161,7 +161,7 @@ export class ControlHorasComponent implements OnInit {
         this.http.put(this.loginService.path + 'hours_counter/', body, httpOptions).subscribe({
           next: (response: any) => {
             //console.log('Se agrego la hora correctamente')
-            this.errorHoras = `<p class="text-success">Se agrego la hora correctamente, para ver el cambio recarga la pagina</p>`;
+            this.errorHoras = `<p class="text-success">Se agrego la hora correctamente <br>Para ver los datos oprime de nuevo "Buscar"</p>`;
           },
           error: (error: any) => {
             console.log(error)
@@ -190,8 +190,6 @@ export class ControlHorasComponent implements OnInit {
 
         this.year = yearAux[0];
 
-        //console.log('0', this.month, this.year, this.equipment_id);
-
         const httpOptions = {
           headers: new HttpHeaders({
             'Content-Type': 'application/json',
@@ -200,7 +198,7 @@ export class ControlHorasComponent implements OnInit {
           params: {
             'equipment_id': this.equipment_id,
           }
-        }
+        };
 
         const body = {
           "current": 0,
@@ -229,8 +227,6 @@ export class ControlHorasComponent implements OnInit {
         })
       }
 
-
-
     } else {
       alert('Solo puede agregar el valor 1 vez por intento');
     }
@@ -252,9 +248,9 @@ export class ControlHorasComponent implements OnInit {
 
     this.http.delete(this.loginService.path + 'hours_counter/', httpOptions).subscribe({
       next: () => {
-        this.borrarMes = `<p class="text-success text-center">Mes borrado con exito <br>No te olvides recargar la pagina para ver tus cambios</p>`
+        this.borrarMes = `<p class="text-success text-center">Mes borrado con éxito <br>Para ver los datos oprime de nuevo "Buscar"</p>`
       },
-      error:() => {
+      error: () => {
         console.log('error a la hora de borrar');
 
       }
@@ -364,6 +360,7 @@ export class ControlHorasComponent implements OnInit {
           No hay equipos con horas registradas en este mes
         </h3>`;
       this.whit_dataHours = false;
+      this.hours_array = [];
     }
   }
 

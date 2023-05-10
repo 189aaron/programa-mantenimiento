@@ -21,11 +21,11 @@
                             <tr *ngFor="let equipo of equipment_array;">
                                 <td class="text-end">{{equipo.group_no}}</td>
                                 <td>{{equipo.name}}</td>
-                                <td>{{equipo.hours}}</td>
+                                <td class="text-center">{{equipo.hours}}</td>
                                 <td *ngIf="superUsuario || ambosBuques">{{equipo.ship}}</td>
-                                <td *ngIf="superUsuario == false && userAdministrador == false">
+                                <!--<td *ngIf="superUsuario == false && userAdministrador == false">
                                     <button class="btn btn-azul">Consultar Horas</button>
-                                </td>
+                                </td>-->
                                 <td *ngIf="superUsuario || userAdministrador">
                                     <!--TODO cambiar por los colores en el style intercalando el azul y oro-->
                                     <button class="btn btn-azul btn-sm" data-bs-toggle="modal"
@@ -40,12 +40,12 @@
             </div>
         </div>
 
-        <div class="row justify-content-between pt-3">
-            <div class="col-auto offset-1">
-                <form (ngSubmit)="list_hour(formListHour)" novalidate class="form-group" #formListHour="ngForm"
-                    autocomplete="off">
+        <div class="row pt-3">
+            <div class="col-auto me-auto ms-5">
+                <form (ngSubmit)="list_hour(formListHour)" novalidate class="form-group" #formListHour="ngForm" autocomplete="off">
+                    <h4>Seleciona un Mes</h4>
                     <div class="form-group mb-3">
-                        <label for="Label" class="form-label"><span class="h4">Seleciona un Mes</span></label>
+                        <!--<label for="Label" class="form-label"><span class="h4">Seleciona un Mes</span></label>-->
                         <input type="month" name="month" placeholder="" class="form-control" ngModel>
                         <div class="d-grid pt-3">
                             <button type="submit" class="btn btn-oro btn-lg">Buscar</button>
@@ -55,8 +55,8 @@
 
             </div>
             <div class="col-3">
-                <h4 class="pt-5">Mes: {{mesConsulta}}</h4>
-                <h4>Año: {{anioConsulta}}</h4>
+                <h5 class="pt-5">Mes: <span class="h3">{{mesConsulta}}</span></h5>
+                <h5>Año: <span class="h3">{{anioConsulta}}</span></h5>
             </div>
         </div>
         <div class="row pt-3">
@@ -83,7 +83,7 @@
                                 <td *ngIf="superUsuario || userAdministrador">
                                     <button class="btn btn-azul btn-sm" data-bs-toggle="modal"
                                         data-bs-target="#modalHours" (click)="pasarDatosHoras(equipo)"> Agregar
-                                        Horas </button>
+                                        Horas </button> 
                                     <button type="button" class="btn btn-oro" data-bs-toggle="modal"
                                         data-bs-target="#deleteModal" (click)="pasarDatosHoras(equipo)">Eliminar
                                         Horas/Mes</button>

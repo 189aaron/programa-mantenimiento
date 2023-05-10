@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthServiceService {
+  private readonly id_token = 'id_token';
 
   path = 'https://copo-unam.herokuapp.com/';
 
@@ -29,8 +30,8 @@ export class AuthServiceService {
       next: (response: any) => {
         localStorage.setItem('position', response.position)
         localStorage.setItem('ship', response.ship)
-        localStorage.setItem('id_token', response.tokens.access);
-        if (localStorage.getItem('id_token') != "null") {
+        localStorage.setItem(this.id_token, response.tokens.access);
+        if (localStorage.getItem(this.id_token) != "null") {
           this.router.navigate(['/home']);
         } else {
           alert('No se puede iniciar sesión, contacta al administrador');
@@ -56,7 +57,7 @@ export class AuthServiceService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('id_token'),
+        'Authorization': 'Bearer ' + localStorage.getItem(this.id_token),
       }),
       params: {
         'email': email,
@@ -81,7 +82,7 @@ export class AuthServiceService {
           alert(error.error);
           this.router.navigate(['/login']);
         }
-        
+
 
       }
     });
@@ -90,11 +91,13 @@ export class AuthServiceService {
   }
 
   getIdToken() {
-    return localStorage.getItem('id_token')
+    return localStorage.getItem(this.id_token);
   }
 
   logout() {
-    localStorage.removeItem('id_token');
+    localStorage.removeItem('position');
+    localStorage.removeItem('ship');
+    localStorage.removeItem(this.id_token);
     return this.router.navigate(['/login']);
   }
 
@@ -102,7 +105,7 @@ export class AuthServiceService {
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('id_token')
+        'Authorization': 'Bearer ' + localStorage.getItem(this.id_token)
       })
     };
 
@@ -124,13 +127,13 @@ export class AuthServiceService {
         if (error.error.code == 'token_not_valid') {
           alert('Caducó la sesión, por favor ingresa de nuevo');
           this.logout();
-        } else if(error.status == '401'){
-          alert(error.error.detail)
+        } else if (error.status == '401') {
+          alert(error.error.detail);
           this.router.navigate(['/home']);
-        }else{
+        } else {
           alert(JSON.stringify(error.error, null, 2));
         }
-        
+
       }
     });
 
@@ -147,7 +150,7 @@ export class AuthServiceService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('id_token'),
+        'Authorization': 'Bearer ' + localStorage.getItem(this.id_token),
       }),
       params: {
         'email': email,
@@ -158,17 +161,17 @@ export class AuthServiceService {
 
     return this.http.put(this.path + 'auth/change_password/', body, httpOptions).subscribe({
       next: (response: any) => {
-        if (localStorage.getItem('id_token') != "null") {
+        if (localStorage.getItem(this.id_token) != "null") {
           this.router.navigate(['/home']);
         }
 
-        if (response.message == 'Password changed'){
+        if (response.message == 'Password changed') {
           alert(response.message);
         } else {
           alert(response.message);
         }
 
-        
+
       },
       error: (error: any) => {
         if (error.status == '500') {
